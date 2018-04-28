@@ -1,0 +1,37 @@
+<md-card>
+    <md-card-header>
+        <table class="full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Search by Tenant name" name="searchQuery" [(ngModel)]="searchQuery">
+                    </md-input-container>
+                </td>
+
+                <td>
+                    <button md-raised-button (click)="newtenant()" id="newtenant" class="right">New Tenant</button>
+                </td>
+            </tr>
+        </table>
+
+    </md-card-header>
+    <md-card-subtitle>
+    </md-card-subtitle>
+    <md-card-content>
+      <h3>Reseller</h3>
+        <table class="dashboard-display-table">
+            <tr>
+                <th>Tenant Name</th>
+                <th>Revenue/Month</th>
+                <th>Subscription Start Date</th>
+                <th>Subscription End Date</th>
+            </tr>
+            <tr *ngFor="let tenant of tenants | search:'name':searchQuery">
+                <td>{{tenant.name}}</td>
+                <td>{{tenant.revenue}}</td>
+                <td>{{tenant.subscriptionStartDate}}</td>
+                <td>{{tenant.subscriptionEndDate}}</td>
+            </tr>
+        </table>
+    </md-card-content>
+</md-card>

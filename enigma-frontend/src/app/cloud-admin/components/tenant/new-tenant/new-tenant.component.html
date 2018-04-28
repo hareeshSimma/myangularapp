@@ -1,0 +1,182 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+<md-card class="dashboard-card">
+    <md-card-header>
+        <h1 *ngIf='!isEdit'>New Tenant</h1>
+        <h1 *ngIf='isEdit'>Edit Tenant</h1>
+    </md-card-header>
+    <form #f="ngForm">
+        <md-card-content *ngIf="count == 0">
+            <md-list>
+                <md-list-item>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Tenant Name" [(ngModel)]="tenant.username" name="username" #username="ngModel" name="username"
+                            required minlength=5 pattern="[a-zA-Z ]*">
+                        <md-hint *ngIf="username.invalid && (username.dirty || username.touched)" class="error-danger">
+                            <p *ngIf="username.errors.required">username is required</p>
+                            <p *ngIf="!username.errors.required && username.errors.minlength && !username.errors.pattern">
+                                username must be atleast 5 characters
+                            </p>
+                            <p *ngIf="!username.errors.required && username.errors.pattern">
+                                username must contain only alphabets
+                            </p>
+                        </md-hint>
+                        <!--<md-hint class="danger" [hidden]="!username.valid && (username.dirty || !username.touched)">
+                            <span [hidden]="!username.errors?.minlength || username.errors?.required">
+                              Username must be atleast 5 characters
+                            </span>
+                            <span [hidden]="!username.errors?.required">Username is required.</span>
+                         </md-hint>-->
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+            <md-list>
+                <md-list-item>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Email" [(ngModel)]="tenant.email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                            required [readonly]="viewMode">
+                            <md-hint class="error-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                                <span *ngIf="email.errors.required">Email is required</span>
+                                <span *ngIf="email.errors.pattern">Not a valid email</span>
+                            </md-hint>
+                        <!--<md-hint class="danger" [hidden]="!email.valid && (!email.dirty || email.touched)">
+                            <span [hidden]="email.errors?.required || !email.errors?.pattern" class="danger">
+                                Enter valid email address.
+                            </span>
+                            <span [hidden]="!email.errors?.required" class="danger">Email address is required.</span>
+                        </md-hint>-->
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+            <md-list>
+                <md-list-item>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Location" [(ngModel)]="tenant.location" name="location" #location="ngModel" required>
+                        <md-hint class="error-danger" *ngIf="location.invalid && (location.dirty || location.tocuhed)">
+                            <span>Location is required</span>
+                        </md-hint>
+                        <!--<md-hint class="error-danger" [hidden]="location.invalid && (!location.dirty || location.touched)">
+                            <span [hidden]="!location.errors?.required">Location is required.</span>
+                        </md-hint>-->
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+            <md-list>
+                <md-list-item>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="About Us" [(ngModel)]="tenant.bio" name="bio" #bio="ngModel" required>
+                        <md-hint class="error-danger" *ngIf="bio.invalid && (bio.dirty || bio.tocuhed)">
+                            <span>Bio is required</span>
+                        </md-hint>
+                        <!--<md-hint class="error-danger" [hidden]="bio.invalid && (!bio.dirty || bio.touched)">
+                            <span [hidden]="!bio.errors?.required">Bio is required.</span>
+                        </md-hint>-->
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+            <md-list>
+                <md-list-item>
+                    <md-radio-group name="my_options" [required]="isRequired" [(ngModel)]="tenant.role" [align]="isAlignEnd ? 'end' : 'start'">
+                        <md-radio-button value="Reseller">Reseller</md-radio-button>
+                        <md-radio-button value="tenantadmin">Tenant</md-radio-button>
+                    </md-radio-group>
+                </md-list-item>
+            </md-list>
+        </md-card-content>
+        <md-card-content *ngIf="count == 1">
+            <md-list>
+                <md-list-item>
+                    <h2 class="example-h2">Service<span class="danger">*</span></h2>
+                </md-list-item>
+            </md-list>
+            <md-radio-group class="list-radio-group" [(ngModel)]="tenant.subscript" name="subscript" required>
+                <md-radio-button class="list-radio-button" *ngFor="let service of services" [value]="service">
+                    {{service}}
+                </md-radio-button>
+            </md-radio-group>
+        </md-card-content>
+        <md-card-content *ngIf="count == 2">
+            <md-list>
+                <md-list-item>
+                    <md-select class="full-width" id="tenant" [(ngModel)]="tenant.adminid" placeholder="Tenant name" name="id" (change)="onSelect(tenant.adminid)">
+                        <md-option *ngFor="let user of tenantAdmins" [value]="user._id">
+                            {{user.username}}
+                        </md-option>
+                    </md-select>
+                </md-list-item>
+            </md-list>
+            <md-list>
+                <md-list-item>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Email" [(ngModel)]="tenant.adminemail" name="adminemail" #adminemail="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                            required [readonly]="viewMode">
+                            <md-hint class="error-danger" *ngIf="adminemail.invalid && (adminemail.dirty || adminemail.touched)">
+                                <span *ngIf="adminemail.errors.required">Email is required</span>
+                                <span *ngIf="adminemail.errors.pattern">Not a valid email</span>
+                            </md-hint>
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+        </md-card-content>
+        <md-card-content *ngIf="count == 3">
+            <md-list>
+                <md-list-item>
+                    <h2 class="example-h2">Cloud<span class="danger">*</span></h2>
+                </md-list-item>
+            </md-list>
+            <md-radio-group class="list-radio-group" [(ngModel)]="tenant.cloudservice" *ngFor="let cloudservice of cloudservice;let i=index;"
+                name="cloudservice" required>
+                <md-radio-button class="list-radio-button" [value]="cloudservice" (change)="onChange(cloudservice)">
+                    {{cloudservice}}
+                </md-radio-button>
+                <md-list *ngIf="i==0&&c=='AWS'">
+                    <md-list-item>
+                        <md-input-container class="full-width">
+                            <input mdInput placeholder="Access Keys" [(ngModel)]="tenant.AccessKeys" name="AcessKeys" #AccessKeys="ngModel" required>
+                            <md-hint class="danger" [hidden]="!AccessKeys.valid && (AccessKeys.dirty || !AccessKeys.touched)">
+                                <span [hidden]="!AccessKeys.errors?.required">Accesskey is required.</span>
+                            </md-hint>
+                        </md-input-container>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-input-container class="full-width">
+                            <input mdInput placeholder="Secret Key" [(ngModel)]="tenant.secretKey" name="secretKey" #secretKey="ngModel" required>
+                            <md-hint class="danger" [hidden]="!secretKey.valid && (secretKey.dirty || !secretKey.touched)">
+                                <span [hidden]="!secretKey.errors?.required">secretkey is required.</span>
+                            </md-hint>
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+                <md-list *ngIf="i==1&&c=='Azure'">
+                    <md-list-item>
+                        <md-input-container class="full-width">
+                            <input mdInput placeholder="Access Keys" [(ngModel)]="tenant.AccessKeys" name="AcessKeys" #AccessKeys="ngModel" required>
+                            <md-hint class="danger" [hidden]="!AccessKeys.valid && (AccessKeys.dirty || !AccessKeys.touched)">
+                                <span [hidden]="!AccessKeys.errors?.required">Accesskey is required.</span>
+                            </md-hint>
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+                <md-list *ngIf="i==2&&c=='SAML'">
+                    <md-list-item>
+                        <md-input-container class="full-width">
+                            <input mdInput placeholder="Settings" [(ngModel)]="tenant.SAML" name="SAML" #SAML="ngModel" required>
+                            <md-hint class="danger" [hidden]="!SAML.valid && (SAML.dirty || !SAML.touched)">
+                                <span [hidden]="!SAML.errors?.minlength || SAML.errors?.required">
+                              Username must be atleast 5 characters
+                            </span>
+                                <span [hidden]="!SAML.errors?.required">Setting required.</span>
+                            </md-hint>
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+            </md-radio-group>
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button *ngIf="count == 1 || count == 2||count==3" (click)="onBack()">Back</button>
+            <button md-raised-button *ngIf="count == 0 || count == 1||count==2" (click)="onNext()" [disabled]="!f.valid">Next</button>
+            <button md-raised-button *ngIf="count == 3" color="primary" [disabled]="!f.valid" type="submit" (click)="newtenant(tenant,f)">Submit</button>
+        </md-card-actions>
+    </form>
+</md-card>

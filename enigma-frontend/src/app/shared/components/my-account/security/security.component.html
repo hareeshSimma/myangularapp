@@ -1,0 +1,34 @@
+<div *ngIf="isLoading" class="loader">
+    <md-spinner></md-spinner>
+</div>
+<div *ngIf="!isLoading">
+<h3>Sessions</h3>
+<p>This is a list of devices that have logged into your account. Revoke any sessions that you do not recognize.</p>
+<table class="mytable">
+    <div *ngFor="let session of loginDetials| paginate: { itemsPerPage: 10, currentPage: p } ;let i=index ">
+
+        <div class="div_style">
+
+            <i class="material-icons" *ngIf="session.ismobile==true">phone_iphone</i>
+            <i class="material-icons" *ngIf="session.isdesktop==true">desktop_mac</i> {{session.login_ip}}
+
+            <p *ngIf="i!=j">your current session is: </p>
+            <p *ngIf="i==j">Last accessed on: &nbsp; {{session.updatedAt | date:'medium'}}</p>
+            <i class="material-icons" (click)="collapse(i)">more_horiz</i>
+
+            <div *ngIf="i==j">
+
+                <p>{{session.browser}}</p>
+                <p>SignedIn:</p>
+                <p>{{session.login_time | date:'medium'}}</p>
+
+            </div>
+
+
+            <button class="revoke" *ngIf="i!=j" md-raised-button (click)="onRevoke()">Revoke</button>
+
+        </div>
+    </div>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

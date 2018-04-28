@@ -1,0 +1,226 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-12">
+        <div class="tile purple" *ngIf="!template.templateName">
+          <h3 class="title">Select the template you want to generate</h3>
+          <form>
+            <div class="col-sm-6 col-md-6" >
+                <md-select placeholder="Select template" [(ngModel)]="template.templateName" (change)="templateSelected(template.templateName)" name="food">  
+                    <md-option *ngFor="let templat of templates" [value]="templat.name">
+                      {{templat.name}}    
+                    </md-option>  
+                </md-select>
+            </div>
+            <!-- <div class="col-sm-6 col-md-6">
+                <a class="btn btn-outlined btn-theme btn-sm right" (click)="templateSelected(template.templateName)" data-wow-delay="0.7s">Next</a>      
+            </div> -->
+          </form>
+        </div>
+        <div class="tile purple" *ngIf="template.templateName">
+            <h3 class="title">Selected Template:<b> {{template.templateName}}</b></h3>
+        </div>
+    </div>
+    <div class="col-md-12" *ngIf="iaas">
+        <div class="tile white" *ngIf="!aws">
+            <h3 class="title">Choose the service and cluster</h3>
+            <div class="col-sm-4 col-md-4">
+                <form>  
+                  <md-select placeholder="Select Cloud" [(ngModel)]="template.cloudservice" name="cloudservice">  
+                    <md-option *ngFor="let iaa of iaas" [value]="iaa.name">
+                      {{iaa.name}}    </md-option>  
+                    </md-select>
+                </form>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <form>  
+                  <md-select placeholder="Select Cluster" [(ngModel)]="template.containerzation" name="containerzation">  
+                    <md-option *ngFor="let container of containerisations" [value]="container.name">
+                      {{container.name}}    </md-option>  
+                    </md-select>
+                </form>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <a class="btn btn-outlined btn-theme btn-sm right" (click)="serviceSelected(template.cloudservice,template.containerzation)" data-wow-delay="0.7s">Next</a>
+            </div>
+        </div>
+        <div class="tile white" *ngIf="aws">
+            <h3 class="title">Service Selected: <b>{{template.cloudservice}}</b></h3>
+            <h3 class="title">Cluster Selected: <b>{{template.containerzation}}</b></h3>
+        </div>
+    </div>
+    <div class="col-md-12" *ngIf="aws">
+        <div class="tile purple">
+            <h3 class="title">EC2 Inforamtion</h3>
+            <form name="templateForm" #templateForm="ngForm" novalidate>
+
+                <div class="col-sm-4 col-md-5">
+                    <md-select placeholder="Select instance type" class="quarter-width" [(ngModel)]="template.instanceType" name="instanceType" #instanceType="ngModel" required>  
+                        <md-option *ngFor="let inst of instancesTypes" [value]="inst.instance_type">
+                            {{inst.instance_type}}-- vcpu( {{inst.vcpu}} ) -- Memory( {{inst.memory}} GiB)
+                        </md-option>  
+                    </md-select> 
+                
+                </div>
+                <div class="col-sm-4 col-md-5 col-md-offset-1">
+                    <md-input-container class="full-width">
+                            <input 
+                            mdInput
+                            placeholder="VPC Name"
+                            type="text"
+                            id="masternode"
+                            name="masternode"
+                            [(ngModel)]="template.vpcName"
+                            #vpcName="ngModel" required>
+                    </md-input-container> 
+                </div>
+                <div class="col-sm-4 col-md-5">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Name of master"
+                            type="text"
+                            id="masterNodeName"
+                            name="masterNodeName"
+                            [(ngModel)]="template.masterNodeName"
+                            #masterNodeName="ngModel" required>
+                    </md-input-container>
+                </div>
+                <div class="col-sm-4 col-md-5 col-md-offset-1">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Number of master nodes"
+                            type="number"
+                            min="1"
+                            id="masterCount"
+                            name="masterCount"
+                            [(ngModel)]="template.masterCount"
+                            #masterCount="ngModel" required>
+                    </md-input-container>
+                </div>
+                <div class="col-sm-4 col-md-5">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Name of worker node"
+                            type="text"
+                            min="1"
+                            id="workerNodeName"
+                            name="workerNodeName"
+                            [(ngModel)]="template.workerNodeName"
+                            #workerNodeName="ngModel" required>
+                    </md-input-container>
+                </div>
+
+                <div class="col-sm-4 col-md-5 col-md-offset-1">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Number of worker nodes"
+                            type="number"
+                            min="1"
+                            id="workerCount"
+                            name="workerCount"
+                            [(ngModel)]="template.workerCount"
+                            #workerCount="ngModel" required>
+                    </md-input-container>
+                </div>
+                <div class="col-sm-4 col-md-5">
+                    <md-select placeholder = "Select RegionName" 
+                        class="quarter-width"
+                        id="region"  [(ngModel)]="template.region" 
+                        name="region" (change)="getImages(template.region)"
+                        #region="ngModel" required>
+                        <md-option *ngFor="let region of regionList" [value]="region.RegionName">
+                                {{region.RegionName}}
+                        </md-option>
+                    </md-select>
+                </div>
+      
+                <div class="col-sm-4 col-md-5 col-md-offset-1">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Node volume size"
+                            type="number"
+                            min="1"
+                            id="nodeVolume"
+                            name="nodeVolume"
+                            [(ngModel)]="template.volume_size"
+                            #volume_size="ngModel" required>
+                    </md-input-container>
+                </div>
+
+                <div class="col-sm-4 col-md-5">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Vpc Cidr Block"
+                            type="text"
+                            id="vpc_cidr_block"
+                            name="vpc_cidr_block"
+                            [(ngModel)]="template.vpc_cidr_block"
+                            #vpcCidr="ngModel" required>
+                    </md-input-container>
+                </div>
+
+                <div class="col-sm-4 col-md-5 col-md-offset-1">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Subnet Cidr"
+                            type="text"
+                            id="subnet_cidr"
+                            name="subnet_cidr"
+                            [(ngModel)]="template.subnet_cidr"
+                            #subnet="ngModel" required>
+                    </md-input-container>
+                </div>
+                <div class="col-sm-4 col-md-5">
+                    <md-select placeholder = "Select AMI" class="quarter-width" id="amiId"  [(ngModel)]="template.amiId"  name="amiId" #amiId="ngModel" required>
+                        <md-option *ngFor="let amis of amiList" value="{{amis.amiId}}$${{amis.rootdeviceName}}">
+                                {{amis.name}}
+                            </md-option>
+                    </md-select>
+                </div>
+                        <div class="col-sm-12 col-md-11 ">
+                            <button class="btn btn-outlined btn-theme btn-sm right" data-wow-delay="0.7s" [disabled]="!templateForm.form.valid" (click)="createTemplate(template)">Submit</button>
+                        </div>
+            </form>
+        </div>
+        </div>
+            <div class="col-md-12" *ngIf="azure">
+                <div class="tile purple">
+                    <h3 class="title">Enter the access key and secret</h3>
+                    <form>
+                    <div class="col-sm-4 col-md-5">
+                            <md-input-container class="full-width">
+                                <input 
+                                    mdInput
+                                    placeholder="Access Key"
+                                    type="text"
+                                    id="secondry_email"
+                                    name="access"
+                                    [(ngModel)]="template.access">
+                            </md-input-container>
+                    </div>
+                    <div class="col-sm-4 col-md-5 col-md-offset-1">
+                            <md-input-container class="full-width">
+                                <input 
+                                    mdInput
+                                    placeholder="Secrect Key"
+                                    type="text"
+                                    id="secondry_email"
+                                    name="secret"
+                                    [(ngModel)]="template.secret">
+                            </md-input-container>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-11 pull-right">
+                        <a  class="btn btn-outlined btn-theme btn-sm right" data-wow-delay="0.7s" (click)="createTemplate(template)">Submit</a>
+                    </div>
+                </form>
+                </div>
+            </div>
+</div>
+

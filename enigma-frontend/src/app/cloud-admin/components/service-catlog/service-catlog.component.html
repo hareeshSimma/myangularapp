@@ -1,0 +1,106 @@
+<md-grid-list cols="1" rowHeight="200px">
+     <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+
+<md-card class="dashboard-card">
+
+<md-card-header>
+    <h1>New Service</h1>
+</md-card-header>
+
+<form name="subscriptionplan" #subscriptionplan="ngForm"> 
+
+<md-list>
+<md-list-item>
+    <h3>Service Name <span id="red">*</span> </h3>
+</md-list-item>
+
+<md-list-item>
+
+<md-input-container class="full-width">
+     <input mdInput placeholder="Service Name"  [(ngModel)]="SubscriptionPlans.serviceName" id="serviceName" #serviceName="ngModel" name="serviceName" required>
+<md-hint class="red " *ngIf="serviceName.errors && (serviceName.dirty || serviceName.touched)">
+     <span [hidden]="!serviceName.errors.required">Please enter serviceName.</span>
+</md-hint>
+</md-input-container>
+</md-list-item>
+
+</md-list>
+
+<md-list>
+<md-list-item>
+     <h3>Subscription Plans <span id="red">*</span> </h3>
+</md-list-item>
+
+
+</md-list>
+
+<md-card-content class="table-main">
+
+     <table class="mytable restable" *ngFor="let plans of newPlan;let k = index;">
+<tr>
+
+ <md-list>
+ <md-list-item>
+<md-input-container class="full-width">
+     <input mdInput placeholder="Plan Name"  id="Plan_Name" name="planName" #planName="ngModel" [(ngModel)]="SubscriptionPlans.plans[k].planName" required>
+
+     <md-hint class="red " *ngIf="planName.errors && (planName.dirty || planName.touched)">
+            <span [hidden]="!planName.errors.required">Please enter Plan Name.</span>
+    </md-hint>
+
+    </md-input-container>
+</md-list-item>
+</md-list>
+</tr>
+
+<tr>
+<!-- <th></th> -->
+<!-- <th class="tablerow " class="red" (click)="removefeature(plans)" id="removefeature"><i class="material-icons">remove</i></th> -->
+<th *ngFor="let feature of plans.features; let i = index" class="tablerow">
+<md-input-container>
+      <input mdInput placeholder="Feature Name"  id="Feature_Name" [(ngModel)]="SubscriptionPlans.plans[k].features[i].featureName" #featureName="ngModel" [name]="feature.featureName" required>
+      <md-hint class="red " *ngIf="featureName.errors && (featureName.dirty || featureName.touched)">
+            <span [hidden]="!featureName.errors.required">Please enter Feature Name.</span>
+    </md-hint>
+    </md-input-container>
+</th>
+
+<th (click)="addfeature(plans)" id="addfeature" class="green"> <i class="material-icons">add</i> </th>
+
+</tr>
+
+<tr>
+<!-- <td class="row-number-column">
+<md-input-container>
+<input mdInput placeholder="Plan Name"  id="Plan_Name" name="planName" [(ngModel)]="user[k].planName">
+</md-input-container>
+</td> -->
+<td *ngFor="let fe of plans.features; let i = index">
+<md-input-container>
+      <input mdInput placeholder="Feature value" id="Feature_value"  [(ngModel)]="SubscriptionPlans.plans[k].features[i].featureProp"  #featureProp="ngModel" [name]="fe.featureProp" required>
+      <md-hint class="red " *ngIf="featureProp.errors && (featureProp.dirty || featureProp.touched)">
+            <span [hidden]="!featureProp.errors.required">Please enter Feature Value.</span>
+    </md-hint>
+    </md-input-container>
+</td>
+<td class="tablerow " class="red" (click)="removefeature(plans)" id="removefeature"><i class="material-icons">remove</i></td>
+
+
+<!-- <td> <button md-raised-button (click)="addfeature(plans)" type="submit">Add</button> </td>-->
+
+</tr>
+<tr> </tr>
+
+</table>
+
+</md-card-content>
+</form>
+
+<md-card-actions class="btn">
+        <button md-raised-button color="accent" (click)="addplan()" id="addplan"  >Add Plan</button>
+        <button md-raised-button color="warn" (click)="deleteplan()" id="addplan"  >Delete Plan</button>        
+        <button md-raised-button color="primary" id="clickme" (click)="savePlan(SubscriptionPlans)" [disabled]="!subscriptionplan.form.valid" type="submit">Save Plan</button>
+</md-card-actions>
+</md-card>

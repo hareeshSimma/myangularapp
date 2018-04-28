@@ -1,0 +1,54 @@
+<div class="networking" *ngIf="!isSubmit">
+    <md-grid-list cols="1" rowHeight="300px">
+        <md-grid-tile class="dashboard-background"></md-grid-tile>
+    </md-grid-list>
+    <md-card class="dashboard-card">
+        <md-card-header>
+            <md-card-title>
+                <h1>Networking-Ports</h1>
+            </md-card-title>
+        </md-card-header>
+        <md-card-content>
+            <form #f="ngForm">
+                <div>
+                    <h3>Incoming Ports To Open</h3>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Your Answer" name="incomingport" [(ngModel)]="data.incomingport" #incomingPort="ngModel" min="0" max="65535" pattern="^$|^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])?" required>
+                        <md-hint *ngIf="incomingPort.invalid && (incomingPort.dirty || incomingPort.touched)" class="error-danger">
+                            <p *ngIf="incomingPort.errors.required">Incoming port number is required</p>
+                            <p [hidden]="!incomingPort.errors.pattern">Incoming port number should be between 0 and 65535</p>
+                        </md-hint>
+                    </md-input-container>
+                </div>
+                <div>
+                    <h3>Outgoing Ports To Open</h3>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Your Answer" name="outgoingport" [(ngModel)]="data.outgoingport" #outgoingport="ngModel" min="0" max="65535" pattern="^$|^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])?" required>
+                        <md-hint *ngIf="outgoingport.invalid && (outgoingport.dirty || outgoingport.touched)" class="error-danger">
+                            <p *ngIf="outgoingport.errors.required">Outgoing port number is required</p>
+                            <p [hidden]="!outgoingport.errors.pattern"> Outgoing port number should be between 0 and 65535</p>
+                        </md-hint>
+                    </md-input-container>
+                </div>
+                <button md-button (click)="submit(data)" [disabled]="!f.valid">SUBMIT</button>
+                <!--<p>Never submit passwords through Google Forms.</p>-->
+            </form>
+        </md-card-content>
+    </md-card>
+</div>
+<div class="anotherresponse" *ngIf="isSubmit">
+    <md-grid-list cols="1" rowHeight="300px">
+        <md-grid-tile class="color"></md-grid-tile>
+    </md-grid-list>
+    <md-card class="navbar-card">
+        <md-card-header>
+            <md-card-title>
+                <h1>Networking-Ports</h1>
+            </md-card-title>
+        </md-card-header>
+        <md-card-content>
+            <p>Your response has been recorded.</p>
+            <p class="back" (click)="back()">Submit another response</p>
+        </md-card-content>
+    </md-card>
+</div>

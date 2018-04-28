@@ -1,0 +1,87 @@
+<div *ngIf="!isSubmit">
+    <md-grid-list cols="1" rowHeight="300px">
+        <md-grid-tile class="dashboard-background"></md-grid-tile>
+    </md-grid-list>
+
+    <md-card class="dashboard-card">
+        <md-card-header>
+            <h1>DevOps</h1>
+        </md-card-header>
+
+        <md-list>
+            <md-list-item>
+                <h3>Services</h3>
+            </md-list-item>
+
+        </md-list>
+        <md-card-content>
+            <table class="mytable restable">
+                <tr>
+                    <th></th>
+                    <th class="tablerow">Dev</th>
+                    <th class="tablerow">Staging</th>
+                    <th class="tablerow">Production</th>
+                    <th class="tablerow">None</th>
+                </tr>
+                <tr>
+                    <td class="tabledata">Continuous Integration</td>
+                    <td *ngFor="let alert of alerts;let idx = index">
+                        <!-- <md-radio-group class="radio-btn-margin" [(ngModel)]="data.cintegration" >
+                            <md-radio-button class="example-radio-button" [value]="alert.types">
+                            </md-radio-button>
+                        </md-radio-group> -->
+                        <md-checkbox class="radio-btn-margin" [(ngModel)]="data.cintegration[alert.types]" [name]="alert.types" [value]="alert.types"></md-checkbox>
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Continuous Testing</td>
+                    <td *ngFor="let alert of alerts">
+                        <!-- <md-radio-group class="radio-btn-margin" [(ngModel)]="data.ctesting" name="Infrastructure">
+                            <md-radio-button class="example-radio-button" [value]="alert.types">
+                            </md-radio-button>
+                        </md-radio-group> -->
+                        <md-checkbox class="radio-btn-margin" [(ngModel)]="data.ctesting[alert.types]" [name]="alert.types" [value]="alert.types"></md-checkbox>
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Continuous Delivery</td>
+                    <td *ngFor="let alert of alerts">
+                        <!-- <md-radio-group class="radio-btn-margin" [(ngModel)]="data.cdelivery" name="security">
+                            <md-radio-button class="example-radio-button" [value]="alert.types">
+                            </md-radio-button>
+                        </md-radio-group> -->
+                        <md-checkbox class="radio-btn-margin" [(ngModel)]="data.cdelivery[alert.types]" [name]="alert.types" [value]="alert.types"></md-checkbox>
+
+                    </td>
+
+                </tr>
+            </table>
+        </md-card-content>
+
+        <md-card-actions class="btn">
+            <button md-raised-button color="primary" (click)="submit(data)" type="submit">Submit</button>
+
+        </md-card-actions>
+
+    </md-card>
+</div>
+<div class="anotherresponse" *ngIf="isSubmit">
+    <md-grid-list cols="1" rowHeight="300px">
+        <md-grid-tile class="color"></md-grid-tile>
+    </md-grid-list>
+    <md-card class="navbar-card">
+        <md-card-header>
+            <md-card-title>
+                <h1>DevOps</h1>
+            </md-card-title>
+        </md-card-header>
+        <md-card-content>
+            <p>Your response has been recorded.</p>
+            <p class="back" (click)="back()">Submit another response</p>
+        </md-card-content>
+    </md-card>
+</div>

@@ -1,0 +1,73 @@
+<div *ngIf="submitopen">
+    <md-grid-list cols="1" rowHeight="200px">
+        <md-grid-tile class="dashboard-background"></md-grid-tile>
+
+    </md-grid-list>
+    <md-card class="dashboard-card">
+        <md-list>
+            <md-list-item>
+                <h1> Tenant Admin Notifications </h1>
+            </md-list-item>
+            <md-list-item>
+                <h3> Billing </h3>
+            </md-list-item>
+
+            <md-card-content>
+                <!-- <md-list-item>
+                    <table class="notifications-table ">
+                        <tr>
+                            <th></th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>SMS</th>
+                            <th>None</th>
+                        </tr>
+                        <tr class="notifications-row">
+                            <td>Exceeds $X</td>
+                            <td *ngFor="let alert of alerts">
+                                <md-checkbox class="radio-btn-margin" [(ngModel)]="user.Exceeds[alert.types]" [name]="alert.types" [value]="alert.types">
+
+                                </md-checkbox>
+                            </td>
+
+                        </tr>
+                    </table>
+                </md-list-item> -->
+
+                <table class="mytable restable">
+                    <tr>
+                        <th></th>
+                        <th class="tablerow padd_ing">Email</th>
+                        <th class="tablerow  padd_ing">Mobile</th>
+                        <th class="tablerow  padd_ing">SMS</th>
+                        <th class="tablerow  padd_ing">None</th>
+
+                    </tr>
+                    <tr>
+                        <td class="tabledata">A Exceeds $X</td>
+                        <td *ngFor="let alert of alerts">
+
+                            <md-checkbox class="check-btn-margin Exceeds" [(ngModel)]="user.Exceeds[alert.types]" [name]="alert.types" [value]="alert.types"></md-checkbox>
+                        </td>
+
+
+                    </tr>
+                </table>
+
+
+            </md-card-content>
+
+            <md-card-actions>
+                <md-list-item>
+
+                    <button md-raised-button color="primary" class="button notification-btn" [disabled]="!user.Exceeds.Email &&!user.Exceeds.Mobile  && !user.Exceeds.SMS &&!user.Exceeds.None " (click)="onSubmit(user)" type="submit">Submit</button>
+                    <button md-raised-button color="primary" class="button notification-btn" (click)="cancel()" type="submit">Cancel</button>
+                </md-list-item>
+            </md-card-actions>
+
+
+        </md-list>
+    </md-card>
+
+
+</div>

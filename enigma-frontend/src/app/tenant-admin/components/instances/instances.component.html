@@ -1,0 +1,59 @@
+<div *ngIf="isLoading" class="loader">
+    <md-spinner></md-spinner>
+</div>
+<md-card *ngIf="!isLoading" >
+    <md-card-header>
+        <table class="full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <h3>Instances Created</h3>
+                    <button md-raised-button class="right" routerLink="/{{userRole}}/lanches">Launch Instance</button>
+                   
+                </td>
+                <td>
+                    <!--<button md-raised-button class="right" (click)="newUser()">New User</button>-->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <md-select placeholder = "Select Region" class="quarter-width" id="region"  [(ngModel)]="regionName" (change)="changeListInstances(regionName)"  name="regionName">
+                        <md-option *ngFor="let region of regionList" [value]="region.RegionName">
+                            {{region.RegionName}}
+                        </md-option>
+                    </md-select>
+                </td>
+                <td>
+                    <!--<button md-raised-button class="right" (click)="newUser()">New User</button>-->
+                </td>
+            </tr>
+        </table>
+    </md-card-header>
+
+    <md-card-content>
+        <table class="dashboard-display-table">
+            <tr>
+                <th>Name</th>
+                <th>Id</th>
+                <th>Type</th>
+                <th>State</th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let instance of instances">
+                <td>{{instance.Tags[0].Value}}</td>
+                <td>{{instance.InstanceId}}</td>
+                <td>{{instance.InstanceType}}</td>
+                <td>{{instance.State.Name}}</td>
+                <td>
+                  <button md-button class="editbtn" *ngIf="(instance.State.Name == 'running' || instance.State.Name == 'pending')" (click)="changeStateOfInstance(instance.InstanceId,instance.State.Name)"> 
+                     Stop</button>  
+                  <button md-button class="editbtn" *ngIf="(instance.State.Name == 'stopped' || instance.State.Name == 'stopping')" (click)="changeStateOfInstance(instance.InstanceId,instance.State.Name)">Start</button>
+                </td>
+                <td>
+                    <!--<button md-button class="editbtn" (click)="editUser(user._id)">Edit</button>-->
+                    <!--<button md-button class="editbtn" (click)="deleteUser(user._id)">Delete</button>-->
+                </td>
+            </tr>
+        </table>
+
+    </md-card-content>
+</md-card>

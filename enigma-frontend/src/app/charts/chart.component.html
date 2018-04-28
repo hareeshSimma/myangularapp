@@ -1,0 +1,50 @@
+<md-content layout-padding class="dashboard-sidenav-content" style="margin-left: 50px !important;">
+  <!--<div class="row" style="margin-left: 50px; ">
+   <div [ngClass] =' (toggleMax) ? "col-sm-12  barsvgmax" : "col-sm-5  barsvmin"' id="barsvg" >
+      <app-bar-chart (notifyParent)="getNotification($event)"></app-bar-chart>
+    </div>
+    <div [ngClass] =' (lineChart) ? "col-sm-12 lineesvgmax" : "col-sm-5 lineesvgmin"' id="lineesvg">
+      <app-line-chart (lineChartToggle)="getLinechart($event)"></app-line-chart>
+    </div>
+    <div [ngClass] =' (pieChart) ? "col-sm-12 lineesvgmax" : "col-sm-5 lineesvgmin"' id="piechart" >
+     <app-pie-chart (pieChartToggle)="getpieChart($event)"></app-pie-chart>
+    </div>
+    <div [ngClass] =' (multilineChart) ? "col-sm-12 lineesvgmax" : "col-sm-5 lineesvgmin"' id= "multi" >
+      <app-multiline-chart (multilineChartToggle)="getmultilineChart($event)"></app-multiline-chart>
+    </div>
+  </div>-->
+  <div class="row">
+    <div class="col-md-6">
+      <ngx-charts-bar-vertical class="chart-container" [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+        [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [legendTitle]="legendTitle" [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel" [tooltipDisabled]="tooltipDisabled" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+        [showGridLines]="showGridLines" [barPadding]="barPadding" [roundDomains]="roundDomains" [roundEdges]="roundEdges" (select)="select($event)"
+        (legendLabelClick)="onLegendLabelClick($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+    <div class="col-md-6">
+      <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [legend]="showLegend" [explodeSlices]="explodeSlices"
+        [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
+      </ngx-charts-pie-chart>
+    </div>
+    
+    <!-- <div class="col-md-6">
+      <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="multi"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [autoScale]="autoScale"
+      (select)="onSelect($event)">
+    </ngx-charts-line-chart>
+    </div>
+     -->
+  </div>
+</md-content>

@@ -1,0 +1,146 @@
+
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background">
+    </md-grid-tile>
+</md-grid-list>
+<md-card class="dashboard-card">
+    <md-card-content *ngIf="count == 0">
+        <div class="example-container mat-elevation-z8">
+            <div class="example-header">
+            </div>
+            <md-table #table [dataSource]="dataSource">
+                <ng-container mdColumnDef="userName">
+                    <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
+                    <md-cell *mdCellDef="let row"> </md-cell>
+                </ng-container>
+                <ng-container mdColumnDef="subscriptionId">
+                    <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
+                    <md-cell *mdCellDef="let row"> </md-cell>
+                </ng-container>
+                <ng-container mdColumnDef="Status">
+                    <md-header-cell *mdHeaderCellDef> Status </md-header-cell>
+                    <md-cell *mdCellDef="let row" [style.color]="row.color"> </md-cell>
+                </ng-container>
+
+                <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+                <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+            </md-table>
+        </div>
+
+    </md-card-content>
+    <md-card-content *ngIf="count == 1">
+        <md-toolbar color="primary">Plans</md-toolbar>
+        <md-list class="subscriptions-listmain" (click)="subscribeForm()">
+            <md-list-item>
+                <i md-list-avatar class="material-icons">local_see</i>
+                <h3 md-line>Free Trial</h3>
+                <p md-line>
+                    <span>Full Access to services</span>
+                </p>
+            </md-list-item>
+
+            <md-list-item>
+                <i md-list-avatar class="material-icons">local_mall</i>
+                <h3 md-line>Premiere</h3>
+                <p md-line>
+                    <span>This flexible plan involves no up-front costs.Pay only for resources use</span>
+                </p>
+            </md-list-item>
+            <md-list-item>
+                <i md-list-avatar class="material-icons">local_library</i>
+                <h3 md-line>Professional</h3>
+                <p md-line>
+                    <span>Includes reactive technical support during business-hours</span>
+                </p>
+            </md-list-item>
+            <md-list-item>
+                <i md-list-avatar class="material-icons">local_convenience_store</i>
+                <h3 md-line>Plus</h3>
+                <p md-line>
+                    <span>Includes reactive 24/7 technical support,fast initial response and ability to set severity of issues</span>
+                </p>
+            </md-list-item>
+            <md-list-item>
+                <i md-list-avatar class="material-icons">local_post_office</i>
+                <h3 md-line>Basic</h3>
+                <p md-line>
+                    <span>Access to some basic services</span>
+                </p>
+            </md-list-item>
+        </md-list>
+
+    </md-card-content>
+    <md-card-content *ngIf="count == 2">
+        <md-toolbar class="hover-class" (click)="subcollapse(1)">1. About Us</md-toolbar>
+        <md-card *ngIf="isValue==1">
+            <form class="subscription-form">
+                <!--<md-form-field class="inputform-full-width">
+             <md-select placeholder="State">
+              <md-option *ngFor="let state of states" [value]="state.code">{{ state.name }}</md-option>
+            </md-select>
+          </md-form-field>-->
+                <md-form-field class="inputform-full-width">
+                    <input mdInput placeholder="First Name" [(ngModel)]="currentUser.username" name="username">
+                </md-form-field>
+                <md-form-field class="inputform-full-width">
+                    <input mdInput placeholder="Last Name">
+                </md-form-field>
+                <md-form-field class="inputform-full-width">
+                    <input mdInput placeholder="Email Address" [(ngModel)]="currentUser.email" name="email">
+                </md-form-field>
+                <md-form-field class="inputform-full-width">
+                    <input mdInput placeholder="Work Phone">
+                </md-form-field>
+                <md-form-field class="inputform-full-width">
+                    <input mdInput placeholder="Organization">
+                </md-form-field>
+                <md-form-field class="inputform-full-width">
+                    <input mdInput placeholder="PAN ID">
+                </md-form-field>
+            </form>
+        </md-card>
+        <md-toolbar class="hover-class" (click)="subcollapse(2)">2. Identify Verification by Phone</md-toolbar>
+        <md-card *ngIf="isValue==2">
+            <form class="subscription-form">
+               
+                <md-form-field class="inputform-full-width">
+                    <input mdInput placeholder="Mobile Number">
+                </md-form-field>
+            </form>
+        </md-card>
+        <md-toolbar class="hover-class" (click)="openCheckout()">3. Payment Information</md-toolbar>
+        <md-card *ngIf="isValue==3">
+            <form class="subscription-form">
+               
+            </form>
+        </md-card>
+        <md-toolbar class="hover-class" (click)="subcollapse(4)">4.Agreement</md-toolbar>
+        <md-card *ngIf="isValue==4">
+            <md-checkbox class="example-margin">
+
+            </md-checkbox>
+            <span>I agree to the subscription agreement, offer details, and privacy statement.
+           Microsoft may use my email and phone to provide special Microsoft Azure offers.</span>
+
+        </md-card>
+        <md-card-actions>
+            <button md-raised-button color="primary">Submit</button>
+        </md-card-actions>
+    </md-card-content>
+
+    <md-card-actions>
+        <button md-raised-button *ngIf="count == 0" (click)="add()" color="primary">Add Subscription</button>
+        <button md-raised-button *ngIf="count == 1 || count == 2" color="primary" (click)="onBack()" id="onback">Back</button>
+    </md-card-actions>
+
+
+
+</md-card>
+
+<!--<div class="card card-1" *ngFor="let plan of subscriptions" (click)="subscribe(plan._id)">
+
+    <h1 align="center">{{plan.planName}}</h1>
+    <h3 align="center">Description: {{plan.description}}</h3>
+    <h3 align="center">Duration: {{plan.duration}}</h3>
+    <h3 align="center">Price: {{plan.price}}</h3>
+</div>-->

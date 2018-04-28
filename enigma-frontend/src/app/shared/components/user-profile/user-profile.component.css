@@ -1,0 +1,30 @@
+.full-width {
+    width: 100%;
+}
+.list-radio-group .list-radio-button
+{
+    display:block;
+}
+.error-danger{
+    color:red;
+}
+
+table > tbody > td {
+    padding:10px;
+}
+
+table > tbody > td >td {
+    padding:10px 30px;
+}
+md-list-item{
+    padding:5px;
+    width:100%
+}
+
+.right{
+    float:right!important;
+    text-align: center
+}
+.left{
+    float:left
+}

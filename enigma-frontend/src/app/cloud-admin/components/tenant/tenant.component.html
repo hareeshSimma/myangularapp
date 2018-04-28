@@ -1,0 +1,38 @@
+<md-card>
+    <md-card-header>
+        <table class="full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Enter Tenant Name" [(ngModel)]="searchQuery">
+                    </md-input-container>
+                </td>
+
+                <td>
+                    <button md-raised-button (click)="newtenant()" id="newtenant" class="right">New Tenant</button>
+                </td>
+            </tr>
+        </table>
+
+    </md-card-header>
+    <md-card-subtitle>
+    </md-card-subtitle>
+    <md-card-content>
+        <table class="dashboard-display-table">
+            <tr>
+                <th>Tenant Name</th>
+                <th>Email</th>
+                <th>Location</th>
+            </tr>
+            <tr *ngFor="let user of users |search:'email,username':searchQuery|paginate: { itemsPerPage:10, currentPage: p }">
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.location}}</td>
+                <td><button md-button (click)="editUser(user._id)">Edit</button>
+                    <button md-button class="right" id="deleteUser" (click)="deleteUser(user._id)">Delete</button></td>
+            </tr>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        
+    </md-card-content>
+</md-card>

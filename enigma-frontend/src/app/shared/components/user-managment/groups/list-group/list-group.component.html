@@ -1,0 +1,40 @@
+<md-card >
+ <md-card-header>
+   <table class="full-width" cellspacing="0">
+     <tr>
+        <td><md-input-container class="full-width">
+          <input mdInput placeholder="Search by Group Name" [(ngModel)]="searchQuery">
+        </md-input-container>
+        </td>
+        <td>
+          <button md-raised-button class="right" (click)="newGroup()">New Group</button></td>
+      </tr>
+   </table>
+  
+ </md-card-header>
+ <md-card-subtitle>
+ </md-card-subtitle>
+ <md-card-content>
+   <table class="dashboard-display-table">
+    <tr>
+      <th>Group Name</th>
+      <th>Description</th>
+      <th>Created By</th>
+      <th>Created At</th>
+    </tr>
+    <tr *ngFor = "let group of groups |search:'group_name':searchQuery">
+      <td>{{group.group_name}}</td>
+      <td>{{group.description}}</td>
+      <td>{{group.createdby}}</td>
+      <td>{{group.createdAt | date}}</td>
+      <td class="right">
+        <button md-button class="right" (click)="editGroup(group._id)">Edit</button>
+          <button md-button class="right" (click)="deleteGroup(group._id)">Delete</button>
+      </td>
+    </tr>
+   </table>
+ </md-card-content>
+</md-card>
+
+
+

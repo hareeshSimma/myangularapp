@@ -1,0 +1,73 @@
+
+  <table class="background">  
+    <tr>
+  
+    <th>Subscription</th>
+    <th>Resource Group</th>
+  
+    <th>Resource Type</th>
+    <th>Resource</th>
+    
+  </tr>
+  <tr>
+    <td>
+   <md-select class="quarter-width" id="subsc"  [(ngModel)]="subscription" name="subscription"  (change)="isSubscription(subscription)">
+    <md-option  value="">select </md-option>
+          <md-option *ngFor="let subscription of subscriptions" [value]="subscription.name">
+              {{subscription.name}}
+          </md-option>
+      </md-select>
+    </td>
+
+
+    <td>
+   <md-select class="quarter-width" id="rGroup" [(ngModel)]="rGroup" name="resourceGroup" (change)="isResourceGroup(rGroup)"> 
+
+          <md-option *ngFor="let resourceGroup of ResourceGroup" [value]="resourceGroup.name">
+              {{resourceGroup.name}}
+          </md-option>
+      </md-select>
+ 
+    </td>
+    <td>
+ <md-select class="quarter-width" id="rType" [(ngModel)]="rType" name="resourceType" (change)="isResourceType(rType)"> 
+
+          <md-option *ngFor="let resourceType of ResourceType" [value]="resourceType.name" >
+              {{resourceType.name}}
+          </md-option>
+      </md-select>
+  
+
+    </td>
+    <td>
+ <md-select class="quarter-width" id="resource" [(ngModel)]="resource" name="resource" (click)="isEditresource()" >
+
+          <md-option *ngFor="let resource of Resource" [value]="resource.name" >
+              {{resource.name}}
+          </md-option>
+      </md-select>
+    </td>
+    </tr>
+  </table>
+
+
+
+<div *ngIf="!isEdit" >
+  <div class="col-sm-4 col-md-4">
+
+
+  <p>Avaliable Metrics</p>
+    <md-checkbox  class="radio-btn-margin" [(ngModel)]="cpu" name="cpu" value="cpu" (change)="Cpu(cpu)">
+       CPU Utilization
+    </md-checkbox><br>
+
+    <md-checkbox class="radio-btn-margin" [(ngModel)]="memory" [name]="memory" value="memory" (change)="Memory(memory)">
+       Memory Utilization
+    </md-checkbox> <br>
+
+  </div>
+  <div class="col-sm-8 col-sm-8" *ngIf="isDisplay">
+    <app-charts [chartData]="chartData"></app-charts>
+  </div>
+  </div>
+   

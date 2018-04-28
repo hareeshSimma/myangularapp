@@ -1,0 +1,46 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+<md-card class="dashboard-card">
+    <md-card-header>
+        <h1>Cloud Admin - Notifications</h1>
+    </md-card-header>
+    <form role="form" name="notifications" novalidate #notifications="ngForm">
+
+        <md-list>
+            <md-list-item>
+                <h3>Notify me when</h3>
+            </md-list-item>
+
+        </md-list>
+        <md-card-content>
+            <table class="mytable restable">
+                <tr>
+                    <th></th>
+                    <th class="tablerow">Mobile</th>
+                    <th class="tablerow">Email</th>
+                    <th class="tablerow">SMS</th>
+                </tr>
+                <tr *ngFor="let alert of alerts;let idx = index">
+                    <td class="tabledata">{{alert.desc}}</td>
+                    <td>
+                        <md-checkbox class="check-btn-margin New_tenant" name="mobile{{idx}}" [(ngModel)]="user[alert.types].Mobile"></md-checkbox>
+                    </td>
+                    <td>
+                        <md-checkbox class="check-btn-margin New_tenant" name="email{{idx}}" [(ngModel)]="user[alert.types].Email"></md-checkbox>
+                    </td>
+                    <td>
+                        <md-checkbox class="check-btn-margin New_tenant" name="sms{{idx}}" [(ngModel)]="user[alert.types].SMS"></md-checkbox>
+                    </td>
+                </tr>
+
+            </table>
+        </md-card-content>
+
+        <md-card-actions class="btn">
+            <button md-raised-button color="primary" (click)="clickme(user)" [disabled]="notifications.pristine" class="notifications" type="submit">Submit</button>
+            <button md-raised-button color="primary" (click)="cancel()" type="submit">Cancel</button>
+        </md-card-actions>
+    </form>
+</md-card>

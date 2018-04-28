@@ -1,0 +1,24 @@
+.div_style {
+    border: 1px solid #c0c3bd;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    padding: 0 17px;
+    padding-top: 10px;
+    padding-bottom: 1px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    width: 100%;
+}
+
+.revoke {
+    float: right;
+    margin-top: -42px;
+}
+
+.material-icons {
+    cursor: pointer;
+}
+
+.mytable {
+    width: 100%
+}

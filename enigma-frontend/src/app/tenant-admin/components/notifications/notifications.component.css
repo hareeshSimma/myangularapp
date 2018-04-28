@@ -1,0 +1,30 @@
+.button {
+    margin-top: 59px;
+    padding-right: 22px;
+}
+
+.notification-btn {
+    margin: 70px 0px 0px 15px !important;
+}
+
+.check-btn-margin {
+    display: table;
+    margin: 0px auto;
+}
+
+.padd_ing {
+    padding: 0 40px!important;
+}
+
+.mytable {
+    padding: 0 12px;
+}
+
+tr {
+    background-color: #fafafa;
+}
+
+.restable tr td,
+.restable th {
+    padding: 10px 0px;
+}

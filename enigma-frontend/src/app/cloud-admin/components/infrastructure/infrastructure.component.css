@@ -1,0 +1,20 @@
+
+
+
+md-grid-tile {
+    /* background: #12528a; */
+    position: absolute;
+}
+
+.list-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.list-radio-button {
+    margin: 5px;
+}
+
+.list-selected-value {
+    margin: 15px 0;
+}

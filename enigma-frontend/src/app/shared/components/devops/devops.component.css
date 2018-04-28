@@ -1,0 +1,38 @@
+
+button.mat-button {
+    background-color: #4285f4;
+    color: white;
+}
+
+.back {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+form {
+    margin-left: 12px;
+}
+
+.radio-btn-margin {
+    display: table;
+    margin: 0px auto;
+}
+
+.mytable {
+    padding: 0 12px;
+}
+
+.btn {
+    margin: 14px;
+    margin-top: 55px;
+}
+
+tr {
+    background-color: #fafafa;
+}
+
+td,
+th {
+    padding: 20px;
+}

@@ -1,0 +1,122 @@
+<div *ngIf="!isEdit">
+    <md-grid-list cols="1" rowHeight="200px">
+        <md-grid-tile class="dashboard-background"></md-grid-tile>
+    </md-grid-list>
+
+
+    <md-card class="dashboard-card ">
+        <md-card-header>
+            <h3>User Profile</h3>
+        </md-card-header>
+
+
+        <md-card-content  *ngIf="user">
+            <br>
+             <table class="table">
+    
+                <tbody>
+                <tr>
+                    <td><label>First Name:</label></td>
+                    <td><span>{{user.first_name}}</span></td>
+                </tr>
+                <tr>
+                    <td><label>Last Name:</label></td>
+                    <td><span>{{user.last_name}}</span></td>
+                </tr>
+                <tr>
+                    <td><label>User Name:</label></td>
+                    <td><span>{{user.username}}</span></td>
+                </tr>
+                <tr>
+                    <td><label>Role:</label></td>
+                    <td><span>{{user.role}}</span></td>
+                </tr>
+                <tr>
+                    <td><label>Email:</label></td>
+                    <td><span>{{user.email}}</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </md-card-content>
+
+        <md-card-actions>
+            <button md-button md-raised-button color="primary" (click)="editUser(user._id)">Edit</button>
+            <button md-raised-button color="primary" (click)="cancel()">Cancel</button>
+        </md-card-actions>
+
+
+    </md-card>
+
+</div>
+
+<div *ngIf="isEdit">
+    <md-grid-list cols="1" rowHeight="200px">
+        <md-grid-tile class="dashboard-background"></md-grid-tile>
+    </md-grid-list>
+    <md-card class="dashboard-card ">
+        <md-card-header>
+            <md-card-title>
+                <h3>Edit Profile</h3>
+            </md-card-title>
+        </md-card-header>
+
+        <md-card-content>
+
+            <md-list-item>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="First Name" autofocus [(ngModel)]="data.first_name" id="first_name" name="firstname" required>
+                </md-input-container>
+            </md-list-item>
+
+            <md-list-item>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="last Name" [(ngModel)]="data.last_name" id="last_name" name="lastname" required>
+                </md-input-container>
+            </md-list-item>
+
+            <md-list-item>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="user Name" [(ngModel)]="data.username" id="username" name="username" required>
+                </md-input-container>
+            </md-list-item>
+
+            <md-list-item>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="role" [(ngModel)]="data.role" id="role" name="role" required>
+                </md-input-container>
+                <!-- 
+                    <md-select
+                    class="full-width" 
+                    id="role"
+                    [ngModel]="roles.role"
+                    placeholder="Select Role"
+                   >
+                    <md-option *ngFor="let role of roles" [value]="role.role_name" >
+                        {{role.role_name}}
+                    </md-option>
+                </md-select> -->
+            </md-list-item>
+
+
+
+            <md-list-item>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="Email id" disabled [(ngModel)]="data.email" name="email" id="email" required>
+                </md-input-container>
+            </md-list-item>
+
+            <md-list-item>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="Secondary Mail Id" [(ngModel)]="data.secondry_email" id="secondry_email" name="secondmail">
+                </md-input-container>
+            </md-list-item>
+
+
+        </md-card-content>
+        <md-card-actions class="btn">
+            <button md-raised-button color="primary" (click)="Submit(data)" id="profile" type="submit">Submit</button>
+            <button md-raised-button color="primary" (click)="cancel()" id="cancel" type="submit">Cancel</button>
+
+        </md-card-actions>
+    </md-card>
+</div>

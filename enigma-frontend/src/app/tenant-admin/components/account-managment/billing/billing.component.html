@@ -1,0 +1,147 @@
+<div>
+    <md-tab-group>
+        <!--Plan Selection Tab -->
+        <md-tab label="Plan Selection">
+            <h3>My Subscriptions</h3>
+            <p>Your subscription plan starts on jun 5,2017(UTC) amd will automatically renew on july 5,2017(UTC)</p>
+            <table class="dashboard-display-table">
+                <tr>
+                    <th>Subscription</th>
+                    <th>Count</th>
+                    <th>Type</th>
+                    <th>Term</th>
+                    <th>Start date</th>
+                    <th>Next billing date</th>
+                    <th>Next invoice amount</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let data of data ">
+                    <td>{{data.subscription}}</td>
+                    <td>{{data.count}}</td>
+                    <td>{{data.type}}</td>
+                    <td>{{data.term}}</td>
+                    <td>{{data.startdate}}</td>
+                    <td>{{data.nextbillingdate}}</td>
+                    <td>{{data.nextinvoiceamount}}</td>
+                    <td>{{data.status}}</td>
+                    <td><a href="">Edit</a><span id="vline">|</span><a href="">Cancel</a><br><a href="">Subsciption</a></td>
+                </tr>
+            </table>
+            <div class="buttons">
+                <button md-button>Upgrade plan</button>
+                <button md-button>Update Credit Card</button>
+                <button md-button>Pay Bill/View Invoice</button>
+            </div>
+        </md-tab>
+        <!--Billing Information Tab-->
+        <md-tab label="Billing Information">
+            <div class="billing">
+                <h3>Your Standdard Pro Monthly subscription will automatically renew on {{data[0].nextbillingdate}} (UTC).</h3>
+                <md-list id="mdlist">
+                    <md-list-item id="content"><span id="dot">.</span> You can update your billing information below.</md-list-item>
+                    <md-list-item id="content"><span id="dot">.</span> It will take effect on next billing cycle.</md-list-item>
+                </md-list>
+                <div class="currency">
+                    <strong>Currency</strong>
+                    <md-select placeholder="currency">
+                        <md-option *ngFor="let cur of currency" [value]="cur">{{ cur }}</md-option>
+                    </md-select>
+                </div>
+                <div class="contact">
+                    <strong>Bill To Contact</strong>
+                    <a href="" id="edit">Edit</a>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Full Name : </td>
+                            <td>User</td>
+                        </tr>
+                        <tr>
+                            <td>Email : </td>
+                            <td>user@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td>Additional Email : </td>
+                            <td>user1@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number : </td>
+                            <td>1234567890</td>
+                        </tr>
+                        <tr>
+                            <td>Company : </td>
+                            <td>xyz software pvt ltd.</td>
+                        </tr>
+                        <tr>
+                            <td>Address : </td>
+                            <td>xyz</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="sold">
+                    <strong>Sold To Contact</strong>
+                    <a href="" id="edit">Edit</a>
+                    <h6>Same as Bill To Contact</h6>
+                </div>
+                <div class="payment">
+                    <strong>Payment Method</strong>
+                    <a href="" id="edit">Edit</a>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Pay By : </td>
+                            <td>User</td>
+                        </tr>
+                        <tr>
+                            <td>Holder Name : </td>
+                            <td>user</td>
+                        </tr>
+                        <tr>
+                            <td>Card Number : </td>
+                            <td>6559889659858</td>
+                        </tr>
+                        <tr>
+                            <td>Expires : </td>
+                            <td>22/22</td>
+                        </tr>
+                        <tr>
+                            <td>Address : </td>
+                            <td>xyz</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </md-tab>
+        <!--Invoice History Tab-->
+        <md-tab label="Invoice History">
+            <div class="invoice">
+                <p>This page includes all invoices for the past year.You can also see <a id="previous" href="">invoices for the previous 3 year.</a></p>
+            </div>
+            <table class="dashboard-display-table">
+                <tr>
+                    <th>Invoice Number</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Amount</th>
+                    <th>Receipt</th>
+                    <th>Pay</th>
+                </tr>
+                <tr *ngFor="let data of invoiceDetails ">
+                    <td>{{data.invoicenumber}}</td>
+                    <td>{{data.duedate}}</td>
+                    <td>{{data.status}}</td>
+                    <td>{{data.amount}}</td>
+                    <td>Print</td>
+                    <td></td>
+                </tr>
+            </table>
+        </md-tab>
+    </md-tab-group>
+</div>

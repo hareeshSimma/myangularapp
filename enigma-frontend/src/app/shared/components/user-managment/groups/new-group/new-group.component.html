@@ -1,0 +1,66 @@
+
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+<md-card class="dashboard-card">
+    <md-card-header>
+        <h1 *ngIf='!isEdit'>New Group </h1>
+        <h1 *ngIf='isEdit'>Edit Group </h1>
+    </md-card-header>
+    <form [formGroup]="myForm" (ngSubmit)="addGroup()" novalidate>
+      <md-card-content class="form-group">
+            <md-list >
+                <md-list-item>
+                    <md-input-container class="full-width" dividerColor="{{ (!group_name.valid && !group_name.pristine) ? 'warn' : 'primary' }}">
+                        <input 
+                                mdInput 
+                                placeholder="Group Name"
+                                type="text"
+                                id="group_name"
+                                [ngModel]="groupToEdit?.group_name"
+                                formControlName="group_name">
+                        <md-hint class="danger" [hidden]="!group_name.valid && (!group_name.dirty || !group_name.touched)">
+                            <span [hidden]="!group_name.errors?.required">
+                                Role Name is required.
+                            </span>
+                            <span [hidden]="(group_name.errors?.required && group_name.errors?.pattern) || !group_name.errors?.minlength">Name must be 4 characters long</span><br>
+                            <span [hidden]="(group_name.errors?.required && group_name.errors?.minlength) || !group_name.errors?.pattern">No spaces and special charecters are allowed</span>
+                        </md-hint> 
+                    </md-input-container>
+                </md-list-item>
+                <br><br><br>
+                <md-list-item>
+                    <md-input-container class="full-width" dividerColor="{{ (!description.valid && !description.pristine) ? 'warn' : 'primary' }}">
+                        <textarea 
+                                mdInput 
+                                placeholder="Group Description"
+                                type="text"
+                                id="description"
+                                [ngModel]="groupToEdit?.description"
+                                formControlName="description"></textarea>
+                        <md-hint class="danger" [hidden]="!description.valid && (!description.dirty || !description.touched)">
+                            <span [hidden]="!description.errors?.required">
+                                 Description for Role is required.
+                            </span>
+                            <span [hidden]="(description.errors?.required && description.errors?.maxlength) || !description.errors?.minlength">description must contain atleast 10 charactres</span>
+                            <span [hidden]="(description.errors?.required && description.errors?.minlength) || !description.errors?.maxlength ">description must have maximun 140 characters</span>    
+                        </md-hint>  
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+    </md-card-content>
+    <md-card-actions>
+        <button 
+                md-raised-button
+                type="submit"
+                [disabled]="!myForm.valid">Submit</button>
+        <button md-raised-button (click)="goBack()">Cancel</button>
+    </md-card-actions>
+    </form>
+</md-card>
+
+
+
+
+

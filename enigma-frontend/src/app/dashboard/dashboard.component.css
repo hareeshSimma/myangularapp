@@ -1,0 +1,49 @@
+.mat-toolbar {
+    background: #1F8EAF;
+}
+
+.mat-list-item {
+    color: #b7c2ca;
+    border-bottom: 1px solid #0a3458;
+    cursor: pointer;
+    height: auto;
+}
+
+.mat-list-item:hover {
+    background: #173d5a;
+}
+
+.side-menu i,
+.mat-toolbar i {
+    margin-right: 6px;
+    cursor: pointer;
+    /*color: #032252;*/
+}
+
+.md-primary {
+    background-color: #3f5bbb;
+    color: #fffcfc;
+    margin-left: 17px !important;
+}
+
+.color {
+    background: #5a646f;
+}
+
+.menucolor {
+    color: white!important;
+}
+
+.menucolor {
+    color: white!important;
+    position: absolute;
+    top: 20px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+md-list-item{
+    font-family: serif!important;
+}
+/* ._padding{
+    padding:0 30px;
+} */

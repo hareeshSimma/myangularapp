@@ -1,0 +1,43 @@
+<md-card>
+  <md-card-header>
+    <table class="full-width" cellspacing="0">
+      <tr>
+        <td><md-input-container class="full-width">
+          <input mdInput placeholder="Enter role name" [(ngModel)]="searchQuery">
+        </md-input-container>
+        </td>
+        
+        <td>
+          <button md-raised-button class="right" (click)="newPrivilege()">New Privilege</button>
+        </td>
+      </tr>
+    </table> 
+  </md-card-header>
+  <md-card-subtitle>
+  </md-card-subtitle>
+  <md-card-content>
+    <table class="dashboard-display-table">
+      <tr>
+        <th>Privilege Name</th>
+        <th>Description</th>
+        <th>Created By</th>
+         <th>Created At</th>
+      </tr>
+      <tr *ngFor = "let privilege of privileges | paginate: { itemsPerPage:10, currentPage: p } | search:'name':searchQuery">
+        <td>{{privilege.name}}</td>
+        <td>{{privilege.description}}</td>
+        <td>{{privilege.createdBy}}</td>
+        <td>{{privilege.createdAt | date}}</td>
+        <td>
+          <button md-button  id="{{privilege.name}}" (click)="editPrivilege(privilege._id)">Edit</button>
+          <button md-button  id="{{privilege.name}}" (click)="deletePrivilege(privilege._id,privilege.name)">Delete</button>          
+        </td>
+      </tr>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    
+  </md-card-content>
+</md-card>
+
+
+

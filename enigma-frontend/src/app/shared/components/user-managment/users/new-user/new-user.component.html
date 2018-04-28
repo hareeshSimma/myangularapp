@@ -1,0 +1,205 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+
+<md-card class="dashboard-card ">
+    <md-card-header>
+        <h1 *ngIf='!isEdit'>New User</h1>
+        <h1 *ngIf='isEdit'>Edit user</h1>
+    </md-card-header>
+    
+        <!-- <md-list *ngIf='!isEdit'>
+            <md-list-item>
+                <h3 *ngIf='!isEdit'>Add user</h3>
+            </md-list-item>
+
+        </md-list> -->
+        <!-- <md-list *ngIf='!isEdit'>
+            <md-list-item>
+                <h4>You can add users to Your account.</h4>
+            </md-list-item>
+        </md-list>
+        <md-list *ngIf='!isEdit'>
+            <ul>
+                <li>User will eceive an email to active (for new users) or accept (for existing users).</li>
+                <li>Corp users type is only available when Meeting Connector is enabled.</li>
+                <li>User is listned in Pending tab prior to activation or acceptance.</li>
+            </ul>
+        </md-list> -->
+        <form [formGroup]="myForm" novalidate (ngSubmit)="addNewUser()">
+            <md-card-content class="form-group">
+                <md-list>
+                    <md-list-item>
+                        <md-input-container class="full-width" dividerColor="{{ (!first_name.valid && !first_name.pristine) ? 'warn' : 'primary' }}">
+                            <input
+                                mdInput
+                                placeholder="First Name"
+                                pattern="[a-zA-Z][a-zA-Z ]+"
+                                type="text"
+                                id="first_name"
+                                [ngModel]="userToEdit?.first_name"
+                                formControlName="first_name"
+                                />
+
+                            <md-hint class="danger" [hidden]="!first_name.valid && (!first_name.dirty || !first_name.touched) && !first_name.pattern">
+                                <span [hidden]="!first_name.errors?.minlength || first_name.errors?.required">First Name must be 2 characters long</span>
+                                <span [hidden]="!first_name.errors?.required">
+                                    First Name is required.
+                                </span>
+                                <span [hidden]="!first_name.errors?.pattern">
+                                    Only alphabets allowed.
+                                </span>
+                            </md-hint>  
+                        
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+                <br>
+                <md-list>
+                    <md-list-item>
+
+                        <md-input-container class="full-width" dividerColor="{{ (!last_name.valid && !last_name.pristine) ? 'warn' : 'primary' }}">
+                            <input 
+                                mdInput
+                                placeholder="Last Name"
+                                pattern="[a-zA-Z][a-zA-Z ]+"
+                                type="text"
+                                id="last_name"
+                                [ngModel]="userToEdit?.last_name"
+                                formControlName="last_name">
+                                
+                                <md-hint class="danger" [hidden]="!last_name.valid && (!last_name.dirty || !last_name.touched) && !last_name.pattern">
+                                    <span [hidden]="!last_name.errors?.minlength || last_name.errors?.required">First Name must be 2 characters long</span>
+                                    <span [hidden]="!last_name.errors?.required">
+                                        Last Name is required.
+                                    </span>
+                                    <span [hidden]="!last_name.errors?.pattern">
+                                        Only alphabets allowed. 
+                                    </span>
+                                </md-hint>  
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+                <br>
+                <md-list>
+                    <md-list-item>
+                        <md-input-container class="full-width" dividerColor="{{ (!username.valid && !username.pristine) ? 'warn' : 'primary' }}">
+                            <input 
+                                mdInput
+                                placeholder="User Name"
+                                type="text"
+                                id="username"
+                                [ngModel]="userToEdit?.username"
+                                formControlName="username">
+
+                                <md-hint class="danger" [hidden]="!username.valid && (!username.dirty || !username.touched)">
+                                    <span [hidden]="!username.errors?.minlength || username.errors?.required">User Name must be 5 characters long</span>
+                                    <span [hidden]="!username.errors?.required">
+                                        User Name is required.
+                                    </span>
+                                </md-hint> 
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+                <br>
+                <md-list>
+                    <md-list-item>
+                        <md-input-container class="full-width" dividerColor="{{ (!email.valid && !email.pristine) ? 'warn' : 'primary' }}">
+                            <input
+                                mdInput
+                                placeholder="Email"
+                                type="email"
+                                id="email"
+                                [ngModel]="userToEdit?.email"
+                                formControlName="email">
+
+                                <md-hint class="danger" [hidden]="!email.valid && (!email.dirty || !email.touched)">
+                                    <span class="red" [hidden]="!email.errors?.pattern || email.errors?.required">Enter a valid email.</span>
+                                    <span [hidden]="!email.errors?.required">
+                                        Email is required.
+                                    </span>
+                                </md-hint> 
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+                <br>
+                <md-list>
+                    <md-list-item>
+                        <md-input-container class="full-width" dividerColor="{{ (!secondry_email.valid && !secondry_email.pristine) ? 'warn' : 'primary' }}">
+                            <input 
+                                mdInput
+                                placeholder="Alternate Email"
+                                type="email"
+                                id="secondry_email"
+                                [ngModel]="userToEdit?.secondry_email"
+                                formControlName="secondry_email"
+                                >
+                                <md-hint class="danger" [hidden]="!secondry_email.valid ">
+                                    <span [hidden]="!secondry_email.errors?.pattern">enter a valid email like 123@email.com</span>
+                                    
+                                </md-hint> 
+                        </md-input-container>
+                    </md-list-item>
+                </md-list>
+                <br>
+                <md-list>
+                    <md-list-item>
+                        <md-select
+                            class="full-width" 
+                            id="role"
+                            [ngModel]="userToEdit?.role"
+                            placeholder="Select Role"
+                            formControlName="role"
+                            ngDefaultControl>
+                            <md-option *ngFor="let role of roles" [value]="role.role_name" >
+                                <span>{{role.role_name}}</span>
+                            </md-option>
+                            <md-hint class="danger" [hidden]="!role.valid && (!role.dirty || !role.touched)">
+                                <span [hidden]="!role.errors?.required">
+                                    Role is required.
+                                </span>
+                            </md-hint>
+                        </md-select>
+                        
+                    </md-list-item>
+                </md-list>
+                <br>
+                <md-list>
+                    <md-list-item>
+
+                        <md-select 
+                            class="full-width" 
+                            id="parentid"
+                            placeholder="Select Tenant"
+                            [ngModel]="userToEdit?.parentid"
+                            ngDefaultControl
+                            formControlName="parentid">
+                            <md-option *ngFor="let tenant of tenants" [value]="tenant._id">
+                                {{tenant.first_name}}
+                            </md-option>
+                        </md-select>
+                    </md-list-item>
+                </md-list>
+                
+
+                
+            </md-card-content>
+
+            <md-card-actions class="btn">
+                <button 
+                        md-raised-button 
+                        color="primary" 
+                        [disabled]="!myForm.valid"
+                        type="submit" *ngIf="!userToEdit">Add</button>
+                                        <button 
+                        md-raised-button 
+                        color="primary" 
+                        [disabled]="!myForm.dirty && myForm.valid"
+                        type="submit" *ngIf="userToEdit">Update</button>
+                <button md-raised-button color="primary" (click)="cancel()" type="submit">Cancel</button>
+
+            </md-card-actions>
+        </form>
+
+</md-card>

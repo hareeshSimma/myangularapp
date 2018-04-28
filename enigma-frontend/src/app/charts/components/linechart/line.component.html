@@ -1,0 +1,16 @@
+<div style="width:100%;background:steelblue; height: 20px;">
+   <span class="pull-right glyphicon  glyphicon-{{icons}}" (click)="toggleNav()" style="padding-right: 5px; padding-top: 2px;"  [class.toggled]="navToggle === true"></span>
+   </div>
+<!--<svg  id="linesvg"  preserveAspectRatio="xMidYMid meet"></svg>-->
+  
+<div class="col-sm-12" >
+	<div [ngClass]=" navToggle ? 'col-sm-6' : 'col-sm-12' " >
+	<svg  id="linesvg" preserveAspectRatio="xMidYMid meet"></svg>
+	</div>
+	<div class="col-sm-6 table-responsive" *ngIf="navToggle" style="height: 450px;">
+		<table class="table ">
+			<tr><th>Date </th><th>Value</th></tr>
+			<tr *ngFor="let d of records"><td>{{d.date}}</td><td>{{d.value}}</td></tr>
+		</table>
+</div>
+</div>

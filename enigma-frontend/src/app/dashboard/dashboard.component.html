@@ -1,0 +1,45 @@
+<!--top bar component-->
+<i class="material-icons menucolor" (click)="sidenav.toggle()">menu</i>
+<app-top-bar></app-top-bar>
+
+<md-sidenav-container class="dashboard-container">
+    <md-sidenav #sidenav mode="side" class="dashboard-sidenav" opened="true">
+        <md-list class="side-menu">
+            <md-list-item routerLink='home' (click)="nav_active('home',false)" [ngStyle]="{'border-left': isActive == 'home' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">account_circle</i> Dashboard</md-list-item>
+            <md-list-item *ngFor="let privilege of privileges"><i class="material-icons">account_circle</i> {{privilege}}</md-list-item>
+            <md-list-item routerLink='changepassword' (click)="nav_active('changepassword',true);collapse(3);" [ngStyle]="{'border-left': (isActive == 'changepassword'||isActive == 'emails'||isActive == 'security'||isActive == 'accesskeys') ? '4px solid rgb(78, 193, 237)' : ' #12528a' }"><i class="material-icons">assignment_ind</i>My Account<i class="material-icons " *ngIf="!_isMyaccount">keyboard_arrow_down</i><i class="material-icons" *ngIf="_isMyaccount">keyboard_arrow_up</i></md-list-item>
+            <div class=" color" *ngIf="_isCurrentvalue == 3 && _isMyaccount">
+                <md-list-item routerLink='changepassword' class="_padding"  (click)="nav_active('changepassword',true)" [ngStyle]="{'border-left': isActive == 'changepassword' ? '4px solid #deaaaa' : '#12528a' }"><i class="material-icons">lock_open</i>Change Password</md-list-item>
+                <md-list-item routerLink='emails' class="_padding"  (click)="nav_active('emails',true)" [ngStyle]="{'border-left':isActive == 'emails' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">email</i>Emails</md-list-item>
+                <md-list-item routerLink='security' class="_padding"  (click)="nav_active('security',true)" [ngStyle]="{'border-left': isActive == 'security' ? ' 4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">security</i>Security</md-list-item>
+            </div>
+        </md-list>
+    </md-sidenav>
+
+
+    <!--  <div class="dashboard-sidenav-content">
+        <md-card>
+            <md-card-actions>
+                <button md-raised-button class="md-primary" (click)="trigger()">Launch Cluster</button>
+            </md-card-actions>
+
+            <label *ngIf="progress">
+                  <md-progress-bar
+                      class="app-progress"
+                      mode="indeterminate"
+                      aria-label="Determinate progress-bar example"></md-progress-bar>
+                </label>
+
+        </md-card>
+
+        <md-card>
+            {{serverConsoleLogs}}
+        </md-card>
+    </div> -->
+
+
+    <div class="dashboard-sidenav-content">
+        <router-outlet></router-outlet>
+    </div>
+
+</md-sidenav-container>

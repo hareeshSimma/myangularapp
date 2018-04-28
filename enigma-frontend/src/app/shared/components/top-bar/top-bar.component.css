@@ -1,0 +1,49 @@
+.mat-toolbar {
+    background: #3b4e64;
+}
+
+.mat-list-item {
+    color: #b7c2ca;
+    border-bottom: 1px solid #0a3458;
+    cursor: pointer;
+    height: auto;
+}
+
+.mat-list-item:hover {
+    background: #173d5a;
+}
+
+.side-menu i,
+.mat-toolbar i {
+    margin-right: 6px;
+    cursor: pointer;
+    /*color: #032252;*/
+}
+
+.md-primary {
+    background-color: #3f5bbb;
+    color: #fffcfc;
+    margin-left: 17px !important;
+}
+
+.color {
+    background: #1F8EAF;
+}
+
+.menucolor {
+    color: white!important;
+    /* margin-left: 16px;*/
+}
+
+.signinAs {
+    border-bottom: 1px solid #e2baba;
+}
+
+.myicon {
+    font-size: x-small;
+}
+
+.mat-menu-content {
+    /* margin-top: 15px !important; */
+    width: 234px !important;
+}

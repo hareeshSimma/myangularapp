@@ -1,0 +1,128 @@
+<div *ngIf="isLoading" class="loader">
+    <md-spinner></md-spinner>
+</div>
+<div class="row">
+        <fieldset [disabled]="booleanFormDisabled">
+              
+          
+    <div class="col-md-12" >
+
+    <div class="col-md-12">
+        <div class="tile purple">
+          <h4 class="title">Select the template</h4>
+          <hr>
+          <form>
+            <div class="col-sm-6 col-md-6">
+                  <md-select placeholder="Select template" [(ngModel)]="template.templateName" name="food">  
+                    <md-option *ngFor="let templat of templatesList" [value]="templat.template_name">
+                      {{templat.template_name}} -- {{templat.template_type}}   </md-option>  
+                    </md-select>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <a class="btn btn-outlined btn-theme btn-sm right" (click)="templateSelected(template.templateName)" data-wow-delay="0.7s">Next</a>      
+            </div>
+          </form>
+        </div>
+    </div>
+    <hr>
+    <div class="col-md-12" *ngIf="iaas">
+        <div class="tile purple">
+            <h4 class="title">Choose the service</h4>
+            <hr>
+            <div class="col-sm-4 col-md-4">
+                <form>  
+                  <md-select placeholder="Select service" [(ngModel)]="template.cloudService" name="iaas">  
+                    <md-option *ngFor="let iaa of iaas" [value]="iaa.name">
+                      {{iaa.name}}    </md-option>  
+                    </md-select>
+                </form>
+            </div>
+            <div class="col-sm-4 col-md-4">
+             </div>
+            <div class="col-sm-6 col-md-4">
+                <a class="btn btn-outlined btn-theme btn-sm right" (click)="serviceSelected(template.cloudService)" data-wow-delay="0.7s">Next</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="col-md-12" *ngIf="aws">
+        <div class="tile purple">
+            <h4 class="title">Enter your credentails</h4>
+            <hr>
+            <form>
+            <div class="col-sm-4 col-md-5 ">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Your AWS Access Key"
+                            type="password"
+                            id="access"
+                            name="access"
+                            [(ngModel)]="template.accessKey">
+                    </md-input-container>
+            </div>
+            <div class="col-sm-4 col-md-5 col-md-offset-1">
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Your AWS Secrect Key"
+                            type="password"
+                            id="secret"
+                            name="secret"
+                            [(ngModel)]="template.secretKey">
+                    </md-input-container>
+            </div>
+            <div class="col-sm-12 col-md-11 ">
+                <a class="btn btn-outlined btn-theme btn-sm right" data-wow-delay="0.7s" (click)="launch()">Launch</a>
+            </div>
+          </form>
+        </div>
+    </div>
+    <div class="col-md-12" *ngIf="azure">
+        <div class="tile purple">
+            <h3 class="title">Enter the access key and secret</h3>
+            <form>
+            <div class="col-sm-4 col-md-5">
+                  
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Access Key"
+                            type="text"
+                            id="secondry_email"
+                            name="access"
+                            [(ngModel)]="template.access">
+                    </md-input-container>
+            </div>
+            <div class="col-sm-4 col-md-5 col-md-offset-1">
+              
+                    <md-input-container class="full-width">
+                        <input 
+                            mdInput
+                            placeholder="Secrect Key"
+                            type="text"
+                            id="secondry_email"
+                            name="secret"
+                            [(ngModel)]="template.secret">
+                    </md-input-container>
+                
+            </div>         
+            <div class="col-sm-12 col-md-11 pull-right">
+                <a  class="btn btn-outlined btn-theme btn-sm right" data-wow-delay="0.7s" (click)="createTemplate(template)">Save</a>
+            </div>
+          </form>
+          
+          
+         
+        </div>
+    </div>
+</div>
+</fieldset>
+<div class="col-md-12 " style="background: black">
+        <div class="loader" *ngIf="progress"></div>
+        <div class="text" [innerHtml] ="serverConsoleLogs" >
+        </div>
+        
+</div>
+
+</div>

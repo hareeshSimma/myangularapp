@@ -1,0 +1,42 @@
+<md-card>
+  <md-card-header>
+    <table class="full-width" cellspacing="0">
+      <tr>
+        <td><md-input-container class="full-width">
+          <input mdInput placeholder="Enter role name" [(ngModel)]="searchQuery">
+        </md-input-container>
+        </td>
+        <td>
+          <button md-raised-button class="right" (click)="newRole()">New Role</button>
+        </td>
+      </tr>
+    </table> 
+  </md-card-header>
+  <md-card-subtitle>
+  </md-card-subtitle>
+  <md-card-content>
+    <table class="dashboard-display-table">
+      <tr>
+        <th>Role Name</th>
+        <th>Description</th>
+        <th>Created By</th>
+        <th>Created At</th>
+      </tr>
+      <tr *ngFor = "let role of roles | paginate: { itemsPerPage:10, currentPage: p } | search:'role_name':searchQuery">
+        <td>{{role.role_name}}</td>
+        <td>{{role.description}}</td>
+        <td>{{role.createdby}}</td>
+        <td>{{role.createdAt | date}}</td>
+        <td>
+            <button md-button  id="{{role.role_name}}" (click)="editRole(role._id)">Edit</button>                      
+          <button md-button  id="{{role.role_name}}" (click)="deleteRole(role._id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    
+  </md-card-content>
+</md-card>
+
+
+

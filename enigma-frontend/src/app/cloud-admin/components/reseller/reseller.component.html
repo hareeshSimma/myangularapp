@@ -1,0 +1,42 @@
+<md-card>
+    <md-card-header>
+        <table class="full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Search Tenants or Resellers" [(ngModel)]="searchQuery">
+                    </md-input-container>
+                </td>
+                <!--<td>
+                    <button md-raised-button class="right" (click)="newUser()">New User</button>
+                </td>-->
+            </tr>
+        </table>
+    </md-card-header>
+
+    <md-card-content>
+        <table class="dashboard-display-table">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Created By</th>
+                <th>Created On</th>
+                <th>Status</th>
+            </tr>
+            <tr *ngFor="let user of teneller|search:'email,username':searchQuery">
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.createdby}}</td>
+                <td>{{user.createdAt | date}}</td>
+                <td>active</td>
+                <!--<td>
+                    <button md-button class="editbtn" (click)="editUser(user._id)">Edit</button>
+                    <button md-button class="editbtn" (click)="deleteUser(user._id)">Delete</button>
+                </td>-->
+            </tr>
+        </table>
+
+    </md-card-content>
+</md-card>

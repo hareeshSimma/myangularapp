@@ -1,0 +1,51 @@
+<md-toolbar class="dashboard-toolbar">
+
+
+    <h3 class="menucolor" (click)="getdashboard()">&nbsp;&nbsp;&nbsp;Enigma</h3>
+    <!-- <md-input-container class="login-full-width">
+        <i class="material-icons" md-prefix>search</i>
+        <input mdInput placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </md-input-container> -->
+    <div class="header-right">
+
+
+        <span class="menucolor">Welcome :{{currentUser.username}} </span>
+        <span class="menucolor">
+            <i class="material-icons myicon" [mdMenuTriggerFor]="menu">details</i>
+        </span>
+        <span class="icons">
+
+            <!-- <i class="material-icons">settings_applications</i> -->
+
+            <md-menu #menu="mdMenu">
+                <button md-menu-item class="signinAs">
+                    Signed in as:
+                    <span>{{currentUser.username}}</span>
+                </button>
+                <button md-menu-item disabled>
+                    <md-icon>group</md-icon>
+                    <span>{{currentUser.role}}</span>
+                </button>
+                <button md-menu-item (click)="getProfile()" id="getprofile">
+                    <md-icon>perm_identity</md-icon>
+                    <span>Profile</span>
+                </button>
+                <!-- <button md-menu-item disabled>
+                    <md-icon>group</md-icon>
+                    <span>Groups</span>
+                </button> -->
+                <button md-menu-item disabled>
+                    <md-icon>settings</md-icon>
+                    <span>Settings</span>
+                </button>
+                <button md-menu-item (click)="logout()" id="logout">
+                    <md-icon>close</md-icon>
+                    <span>Logout</span>
+                </button>
+            </md-menu>
+        </span>
+
+
+    </div>
+
+</md-toolbar>

@@ -1,0 +1,60 @@
+th,
+td {
+    padding: 5px !important;
+}
+
+span#vline {
+    padding: 4px;
+}
+
+a {
+    color: #ff7800;
+    text-decoration: none;
+}
+
+.buttons {
+    padding-top: 15px;
+}
+
+button.mat-button {
+    color: #ff7800;
+}
+
+button.mat-button:hover {
+    background-color: #ff7800;
+    color: white;
+}
+
+a#previous {
+    color: blue;
+}
+
+span#dot {
+    font-weight: 900;
+    font-size: 25px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+
+md-list-item#content {
+    height: 32px;
+}
+
+md-list#mdlist {
+    margin-top: -25px;
+}
+
+.currency,
+.contact,
+.sold {
+    margin-top: 25px;
+}
+
+.mat-select {
+    margin-left: 20px;
+}
+
+a#edit {
+    float: right;
+    color: blue;
+}

@@ -1,0 +1,38 @@
+<!--top bar component-->
+<app-top-bar></app-top-bar>
+
+<md-sidenav-container class="dashboard-container">
+    <md-sidenav #sidenav mode="side" class="dashboard-sidenav" opened="true" >
+
+        <md-list class="side-menu">
+            <md-list-item routerLink='home' (click)="nav_active('home',false)" [ngStyle]="{'border-left': isActive == 'home' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">account_circle</i> Home</md-list-item>
+            <md-list-item routerLink='networking' (click)="nav_active('networking',false)" [ngStyle]="{'border-left': isActive == 'networking' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">view_list</i>Networking</md-list-item>
+            <md-list-item routerLink='devops' (click)="nav_active('devops',false)" [ngStyle]="{'border-left': isActive == 'devops' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">account_balance</i>DevOps</md-list-item>
+            <md-list-item routerLink='sla' (click)="nav_active('sla',false)" [ngStyle]="{'border-left': isActive == 'sla' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">account_balance</i>SLA</md-list-item>
+
+            <md-list-item routerLink='users' (click)="nav_active('users',true);collapse(2);" [ngStyle]="{'border-left': (isActive == 'users'||isActive == 'privileges'|| isActive == 'roles') ? '4px solid rgb(78, 193, 237)' : ' #12528a' }"><i class="material-icons">account_box</i>User Management
+                <i class="material-icons " *ngIf="!_isUsermanagement">keyboard_arrow_down</i><i class="material-icons" *ngIf="_isUsermanagement">keyboard_arrow_up</i></md-list-item>
+
+            <div class=" color" *ngIf="_isCurrentvalue == 2 && _isUsermanagement">
+                <md-list-item routerLink='users' class="_padding" (click)="nav_active('users',true)" [ngStyle]="{'border-left': isActive == 'users' ? '4px solid #deaaaa' : 'darkcyan' }"><i class="material-icons">perm_identity</i>Users</md-list-item>
+                <!--<md-list-item routerLink='groups' (click)="nav_active('groups',true)" [ngStyle]="{'border-left': isActive == 'groups' ? '4px solid #deaaaa' :'darkcyan' }"><i class="material-icons">group</i>Groups </md-list-item>-->
+                <md-list-item routerLink='roles' class="_padding" (click)="nav_active('roles',true)" [ngStyle]="{'border-left': isActive == 'roles' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">settings</i>Roles Managment</md-list-item>
+                <md-list-item routerLink='privileges' class="_padding" (click)="nav_active('privileges',true)" [ngStyle]="{'border-left': isActive == 'privileges' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">settings</i>Privileges</md-list-item>
+            </div>
+
+            <md-list-item routerLink='changepassword' (click)="nav_active('changepassword',true);collapse(3);" [ngStyle]="{'border-left': (isActive == 'changepassword'||isActive == 'emails'||isActive == 'security') ? '4px solid rgb(78, 193, 237)' : ' #12528a' }"><i class="material-icons">assignment_ind</i>My Account<i class="material-icons " *ngIf="!_isMyaccount">keyboard_arrow_down</i><i class="material-icons" *ngIf="_isMyaccount">keyboard_arrow_up</i></md-list-item>
+            <div class=" color" *ngIf="_isCurrentvalue == 3 && _isMyaccount">
+                <md-list-item routerLink='changepassword' class="_padding" (click)="nav_active('changepassword',true)" [ngStyle]="{'border-left': isActive == 'changepassword' ? '4px solid #deaaaa' : '#12528a' }"><i class="material-icons">lock_open</i>Change Password</md-list-item>
+                <md-list-item routerLink='emails' class="_padding" (click)="nav_active('emails',true)" [ngStyle]="{'border-left':isActive == 'emails' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">email</i>Emails</md-list-item>
+                <md-list-item routerLink='security' class="_padding" (click)="nav_active('security',true)" [ngStyle]="{'border-left': isActive == 'security' ? ' 4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">security</i>Security</md-list-item>
+            </div>
+        </md-list>
+
+    </md-sidenav>
+
+    <div class="dashboard-sidenav-content">
+        <router-outlet></router-outlet>
+    </div>
+
+</md-sidenav-container>
+

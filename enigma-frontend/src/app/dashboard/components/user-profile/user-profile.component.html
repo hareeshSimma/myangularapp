@@ -1,0 +1,38 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+
+<md-card class="dashboard-card ">
+    <md-card-header>
+        <h3>User Profile</h3>
+    </md-card-header>
+
+
+    <md-card-content>
+
+        <md-list *ngIf="currentUser">
+
+            <md-list-item>
+                <label>User Name:</label>
+                <span>{{currentUser.username}}</span>
+            </md-list-item>
+            <md-list-item>
+                <label>Role:</label>
+                <span>{{currentUser.role}}</span>
+            </md-list-item>
+            <md-list-item>
+                <label>Email:</label>
+                <span>{{currentUser.email}}</span>
+            </md-list-item>
+
+        </md-list>
+
+    </md-card-content>
+
+    <md-card-actions>
+
+    </md-card-actions>
+
+
+</md-card>

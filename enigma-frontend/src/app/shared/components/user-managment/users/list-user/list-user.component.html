@@ -1,0 +1,52 @@
+<div *ngIf="isLoading" class="loader">
+    <md-spinner></md-spinner>
+</div>
+
+<md-card *ngIf="!isLoading"> 
+    <md-card-header>
+        <table class="full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="Search by username, first name, last name" [(ngModel)]="searchQuery">
+                    </md-input-container>
+                </td>
+                <td>
+                    <button md-raised-button class="right" (click)="newUser()">New User</button>
+                </td>
+            </tr>
+        </table>
+    </md-card-header>
+
+    <md-card-content>
+        <table class="dashboard-display-table">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Created By</th>
+                <th>Created On</th>
+                <th>Status</th>
+            </tr>
+
+           
+
+            <tr *ngFor="let user of teUsers  | paginate: { itemsPerPage:10, currentPage: p } | search:'email,username':searchQuery">
+
+                <td>{{user.first_name}}{{' '}} {{user.last_name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.createdby}}</td>
+                <td>{{user.createdAt | date}}</td>
+                <td>active</td>
+                <td>
+                    <button md-button id="{{user.first_name}}" (click)="editUser(user._id)">Edit</button>
+                    <button md-button id="{{user.first_name}}" (click)="deleteUser(user._id)">Delete</button>
+                </td>
+            </tr>
+        </table>
+
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </md-card-content>
+</md-card>

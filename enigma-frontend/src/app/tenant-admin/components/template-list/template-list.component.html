@@ -1,0 +1,36 @@
+<md-card>
+  <md-card-header>
+      <table class="full-width" cellspacing="0">
+          <tr>
+              <td>
+                  <h3>List Of Templates</h3>
+               
+                      <button routerLink = "/{{userRole}}/templategeneration" class="btn btn-success">Create New Template</button>
+                 
+              </td>
+              <td>
+                  <!--<button md-raised-button class="right" (click)="newUser()">New User</button>-->
+              </td>
+          </tr>
+      </table>
+  </md-card-header>
+  <md-card-content>
+      <table class="dashboard-display-table">
+          <tr>
+              <th>Template Name</th>
+              <th>Template Type</th>
+              <th>Cloud Service</th>
+              <th>CreatedAt</th>
+              <th>Action</th>
+          </tr>
+          <tr *ngFor="let template of templatesList">
+              <td>{{template.template_name}}</td>
+              <td>{{template.template_type}}</td>
+              <td>{{template.cloud_service}}</td>
+              <td>{{template.createdAt}}</td>
+              <td><button md-no-ink class="btn btn-primary" (click)="deleteTemplate(template._id, template.template_name, template.cloud_service)">Delete</button></td>
+          </tr>
+      </table>
+
+  </md-card-content>
+</md-card>

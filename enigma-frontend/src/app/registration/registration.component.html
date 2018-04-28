@@ -1,0 +1,63 @@
+<!--<md-card class="login-card">
+    <md-card-header>
+        <md-card-title>Registration</md-card-title>
+    </md-card-header>
+    <form name="signup" novalidate #signupForm="ngForm">
+        <md-card-content>
+            <!-- <md-input-container class="login-full-width">
+                <input mdInput placeholder="User Name" [(ngModel)]="username" name="username" id="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            </md-input-container>
+            <md-input-container class="login-full-width">
+                <input mdInput placeholder="Email" [(ngModel)]="email" name="email" id="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+
+                <md-hint class="danger error" *ngIf="email.errors && (email.dirty || email.touched)">
+                    <span [hidden]="!email.errors.required">Please enter Email-Id.</span>
+                    <span [hidden]="!email.errors.pattern">Please enter valid Email-Id pattern</span>
+                </md-hint>
+            </md-input-container>
+            <!--  <md-input-container class="login-full-width">
+                <input mdInput placeholder="Password" [(ngModel)]="password" name="password" id="password" type="password">
+            </md-input-container>
+
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button type="submit" color="primary" [disabled]="!signupForm.form.valid" (click)="registration()" id="registration">Submit</button>
+            <a href="#" md-raised-button color="primary" id="login">Login</a>
+        </md-card-actions>
+    </form>
+</md-card> -->
+
+
+
+<md-card class="login-card">
+    <md-card-header>
+        <md-card-title>
+            <h3>Registration</h3>
+        </md-card-title>
+    </md-card-header>
+    <form novalidate #signupForm="ngForm">
+        <md-card-content>
+            <md-input-container class="login-full-width">
+                <input mdInput placeholder="User Name" [(ngModel)]="username" name="username" id="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            </md-input-container>
+            <md-input-container class="login-full-width">
+                <input mdInput placeholder="Email Id" [(ngModel)]="email" name="email" type="email" id="email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                <!-- <md-hint class="danger" *ngIf="email.errors && (email.dirty || email.touched )" class="error">
+                    <span [hidden]="!email.errors.required">Please enter Email-Id.</span>
+                    <span [hidden]="!email.errors.pattern">Please enter valid Email-Id pattern</span>
+                </md-hint>-->
+            </md-input-container>
+        </md-card-content>
+        <md-card-actions>
+            <md-list>
+                <md-list-item>
+
+                    <button md-raised-button type="submit" color="primary" [disabled]="!signupForm.form.valid" (click)="registration()" id="registration">Submit</button>
+                    <a href="#" md-raised-button color="primary" id="login">Login</a>
+
+                </md-list-item>
+
+            </md-list>
+        </md-card-actions>
+    </form>
+</md-card>

@@ -1,0 +1,78 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+
+<md-card class="dashboard-card ">
+    
+    <md-card-header>
+        <h1 *ngIf='!isEdit'>New Privilege</h1>
+        <h1 *ngIf='isEdit'>Edit Privilege</h1>
+    </md-card-header>
+    <form [formGroup]="myForm" (ngSubmit)="newPrivilege()" novalidate >
+        <md-card-content class="form-group">
+            
+            <md-list>
+                
+                <md-list-item>
+                    <md-input-container class="full-width" dividerColor="{{ (!name.valid && !name.pristine) ? 'warn' : 'primary' }}">
+                        <input 
+                            mdInput
+                            placeholder="Privilege Name"
+                            type="text"
+                            id="name"
+                            [ngModel]="privilegeToEdit?.name"
+                            formControlName="name" >
+                            <md-hint class="danger" [hidden]="!name.valid && (!name.dirty || !name.touched)">
+                                <span [hidden]="!name.errors?.required">
+                                    Privilege Name is required.
+                                </span>
+                                <span [hidden]="(name.errors?.required && name.errors?.pattern) || !name.errors?.minlength">Name must be 4 characters long</span><br>
+                                <span [hidden]="(name.errors?.required && name.errors?.minlength) || !name.errors?.pattern">No spaces and special charecters are allowed</span>
+                            </md-hint>
+                              
+
+                    </md-input-container>
+                </md-list-item>
+
+            </md-list>
+            <br><br>
+            <md-list>
+                
+                <md-list-item>
+
+                    <md-input-container class="danger" class="full-width" dividerColor="{{ (!description.valid && !description.pristine) ? 'warn' : 'primary' }}">
+                        <textarea 
+                            mdInput
+                            placeholder="Description"
+                            type="text"
+                            id="description"
+                            [ngModel]="privilegeToEdit?.description"
+                            formControlName="description"></textarea>
+
+                        <md-hint class="danger" [hidden]="!description.valid && (!description.dirty || !description.touched)">
+                            <span [hidden]="!description.errors?.required">
+                                 Description for Privilege is required.
+                            </span>
+                            <span [hidden]="(description.errors?.required && description.errors?.maxlength) || !description.errors?.minlength">description must contain atleast 10 charactres</span>
+                            <span [hidden]="(description.errors?.required && description.errors?.minlength) || !description.errors?.maxlength ">description must have maximun 140 characters</span>    
+                        </md-hint> 
+                    </md-input-container>
+                </md-list-item>
+
+            </md-list>
+        </md-card-content>
+
+        <md-card-actions class="btn">
+            <button 
+                    md-raised-button 
+                    color="primary" 
+                    [disabled]="!myForm.valid"
+                    type="submit">Submit</button>
+            <button md-raised-button color="primary" (click)="cancel()" type="submit">Cancel</button>
+
+        </md-card-actions>
+    </form>
+
+</md-card>
+

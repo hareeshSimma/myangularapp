@@ -1,0 +1,67 @@
+<!--top bar component-->
+<i class="material-icons menucolor" (click)="sidenav.toggle()">menu</i>
+<app-top-bar></app-top-bar>
+
+<md-sidenav-container class="dashboard-container">
+    <md-sidenav #sidenav mode="side" class="dashboard-sidenav" opened="true">
+
+        <md-list class="side-menu">
+            <md-list-item routerLink='dashboard' (click)="nav_active('dashboard',false)" [ngStyle]="{'border-left': isActive == 'dashboard' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">account_circle</i> Dashboard</md-list-item>
+            <md-list-item routerLink='instances' (click)="nav_active('instances',false)" [ngStyle]="{'border-left': isActive == 'instances' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">account_circle</i> Instances</md-list-item>
+
+            <!-- <md-list-item routerLink='monitoring' (click)="nav_active('monitoring',false)" [ngStyle]="{'border-left': isActive == 'monitoring' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">view_list</i>Monitoring</md-list-item> -->
+            <md-list-item routerLink='monitoring' (click)="nav_active('aws',true);collapse(4);" [ngStyle]="{'border-left': (isActive == 'aws'||isActive == 'azure'|| isActive == 'gcloud') ? '4px solid rgb(78, 193, 237)' : ' #12528a' }"><i class="material-icons">account_box</i>Monitoring
+                <i class="material-icons " *ngIf="!_isMonitoring">keyboard_arrow_down</i><i class="material-icons" *ngIf="_isMonitoring">keyboard_arrow_up</i></md-list-item>
+            <div class=" color" *ngIf="_isCurrentvalue == 4 && _isMonitoring">
+                <md-list-item routerLink='monitoring/aws' class="_padding" (click)="nav_active('aws',true)" [ngStyle]="{'border-left': isActive == 'aws' ? '4px solid #deaaaa' : 'darkcyan' }"><i class="material-icons">perm_identity</i>AWS</md-list-item>
+                <md-list-item routerLink='monitoring/azure' class="_padding" (click)="nav_active('azure',true)" [ngStyle]="{'border-left': isActive == 'azure' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">settings</i>Azure</md-list-item>
+                <md-list-item routerLink='monitoring/gcloud' class="_padding" (click)="nav_active('gcloud',true)" [ngStyle]="{'border-left': isActive == 'gcloud' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">cloud</i>Google Cloud</md-list-item>
+            </div>
+
+            <md-list-item routerLink='security' (click)="nav_active('security',false)" [ngStyle]="{'border-left': isActive == 'security' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">security</i>Security</md-list-item>
+            <md-list-item routerLink='logging' (click)="nav_active('logging',false)" [ngStyle]="{'border-left': isActive == 'logging' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">account_balance</i>Logging</md-list-item>
+            <md-list-item routerLink='integrations' (click)="nav_active('integrations',false)" [ngStyle]="{'border-left': isActive == 'integrations' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">extension</i>Integrations</md-list-item>
+            <md-list-item routerLink='audit' (click)="nav_active('audit',false)" [ngStyle]="{'border-left': isActive == 'audit' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">account_balance</i>Audit</md-list-item>
+            <md-list-item routerLink='notifications' (click)="nav_active('notifications',false)" [ngStyle]="{'border-left': isActive == 'notifications' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">notifications_none</i>notifications</md-list-item>
+            <md-list-item routerLink='templates' (click)="nav_active('templates',false)" [ngStyle]="{'border-left': isActive == 'templates' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">extension</i>Templates List</md-list-item>
+
+            <md-list-item routerLink='users' (click)="nav_active('users',true);collapse(2);" [ngStyle]="{'border-left': (isActive == 'users'||isActive == 'roles'|| isActive == 'privileges') ? '4px solid rgb(78, 193, 237)' : ' #12528a' }"><i class="material-icons">account_box</i>User Management
+                <i class="material-icons " *ngIf="!_isUsermanagement">keyboard_arrow_down</i><i class="material-icons" *ngIf="_isUsermanagement">keyboard_arrow_up</i></md-list-item>
+            <div class=" color" *ngIf="_isCurrentvalue == 2 && _isUsermanagement">
+                <md-list-item routerLink='users' class="_padding" (click)="nav_active('users',true)" [ngStyle]="{'border-left': isActive == 'users' ? '4px solid #deaaaa' : 'darkcyan' }"><i class="material-icons">perm_identity</i>Users</md-list-item>
+                <!--<md-list-item routerLink='groups' (click)="nav_active('groups',true)" [ngStyle]="{'border-left': isActive == 'groups' ? '4px solid #deaaaa' :'darkcyan' }"><i class="material-icons">group</i>Groups </md-list-item>-->
+                <md-list-item routerLink='roles' class="_padding" (click)="nav_active('roles',true)" [ngStyle]="{'border-left': isActive == 'roles' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">settings</i>Roles Managment</md-list-item>
+                <md-list-item routerLink='privileges' class="_padding" (click)="nav_active('privileges',true)" [ngStyle]="{'border-left': isActive == 'privileges' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">settings</i>Privileges</md-list-item>
+            </div>
+
+            <md-list-item routerLink='analytics' (click)="nav_active('analytics',false)" [ngStyle]="{'border-left': isActive == 'analytics' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">timeline</i>Analytics</md-list-item>
+            <md-list-item routerLink='workflow' (click)="nav_active('workflow',false)" [ngStyle]="{'border-left': isActive == 'workflow' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">work</i>Workflow</md-list-item>
+            <md-list-item routerLink='networking' (click)="nav_active('networking',false)" [ngStyle]="{'border-left': isActive == 'networking' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">network_check</i>Networking</md-list-item>
+            <md-list-item routerLink='devops' (click)="nav_active('devops',false)" [ngStyle]="{'border-left': isActive == 'devops' ? '4px solid rgb(78, 193, 237)' : '#12528a' }"><i class="material-icons">all_inclusive</i>Devops</md-list-item>
+
+            <md-list-item routerLink='subscriptions' (click)="nav_active('subscriptions',true);collapse(1);" [ngStyle]="{'border-left': (isActive == 'subscriptions'||isActive == 'billing'||isActive == 'reports') ? '4px solid rgb(78, 193, 237)' : ' #12528a' }"><i class="material-icons">assignment_ind</i>Account Management<i class="material-icons " *ngIf="!_isaccontManagement">keyboard_arrow_down</i><i class="material-icons" *ngIf="_isaccontManagement">keyboard_arrow_up</i></md-list-item>
+            <div class=" color" *ngIf="_isCurrentvalue == 1 && _isaccontManagement">
+                <md-list-item routerLink='subscriptions' class="_padding" (click)="nav_active('subscriptions',true)" [ngStyle]="{'border-left': isActive == 'subscriptions' ? '4px solid #deaaaa' : '#12528a' }"><i class="material-icons">lock_open</i>Subscriptions</md-list-item>
+                <md-list-item routerLink='billing' class="_padding" (click)="nav_active('billing',true)" [ngStyle]="{'border-left':isActive == 'billing' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">email</i>Billing</md-list-item>
+                <md-list-item routerLink='reports' class="_padding" (click)="nav_active('reports',true)" [ngStyle]="{'border-left': isActive == 'reports' ? ' 4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">security</i>Reports</md-list-item>
+            </div>
+
+
+            <md-list-item routerLink='changepassword' (click)="nav_active('changepassword',true);collapse(3);" [ngStyle]="{'border-left': (isActive == 'changepassword'||isActive == 'emails'||isActive == 'security'||isActive == 'accesskeys') ? '4px solid rgb(78, 193, 237)' : ' #12528a' }"><i class="material-icons">assignment_ind</i>My Account<i class="material-icons " *ngIf="!_isMyaccount">keyboard_arrow_down</i><i class="material-icons" *ngIf="_isMyaccount">keyboard_arrow_up</i></md-list-item>
+            <div class=" color" *ngIf="_isCurrentvalue == 3 && _isMyaccount">
+                <md-list-item routerLink='changepassword' class="_padding" (click)="nav_active('changepassword',true)" [ngStyle]="{'border-left': isActive == 'changepassword' ? '4px solid #deaaaa' : '#12528a' }" *ngIf="canChangePassword"><i class="material-icons">lock_open</i>Change Password</md-list-item>
+                <md-list-item routerLink='emails' class="_padding" (click)="nav_active('emails',true)" [ngStyle]="{'border-left':isActive == 'emails' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">email</i>Emails</md-list-item>
+                <md-list-item routerLink='security' class="_padding" (click)="nav_active('security',true)" [ngStyle]="{'border-left': isActive == 'security' ? ' 4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">security</i>Security</md-list-item>
+                <md-list-item routerLink='accesskeys' class="_padding" (click)="nav_active('accesskeys',true)" [ngStyle]="{'border-left':isActive == 'accesskeys' ? '4px solid #deaaaa' : ' darkcyan' }"><i class="material-icons">vpn_key</i>Access Keys</md-list-item>
+            </div>
+
+        </md-list>
+
+    </md-sidenav>
+
+    <div class="dashboard-sidenav-content">
+        <router-outlet></router-outlet>
+        <simple-notifications [options]="options"></simple-notifications>
+    </div>
+
+</md-sidenav-container>

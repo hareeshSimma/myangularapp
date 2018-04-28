@@ -1,0 +1,44 @@
+
+.subscriptions-listmain i {
+    padding: 10px;
+    background: #2a74b5;
+    border-radius: 0px;
+    color: #fff;
+}
+.subscriptions-listmain md-list-item {
+    cursor: pointer;
+}
+.subscriptions-listmain md-list-item:hover {
+    background-color: #bad4ef;
+}
+.inputform-full-width {
+    width: 100%;
+}
+/*md-toolbar.field
+{
+    background-color:#2196F3
+}*/
+.hover-class:hover,.hover-class:focus{
+    cursor:pointer;
+    background:#3498DB;
+}
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  height: 300px;
+  margin: 1rem;
+  position: relative;
+  width: 300px;
+}
+
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+

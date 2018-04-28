@@ -1,0 +1,71 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+<md-card class="dashboard-card">
+    <md-card-header>
+        <h1>Cloud</h1>
+    </md-card-header>
+
+    <md-card-content *ngIf="count == 0">
+        <md-list>
+
+
+            <md-list-item>
+                <h2 class="example-h2">Services <span class="danger">*</span></h2>
+            </md-list-item>
+        </md-list>
+        <md-list>
+            <md-list-item>
+                <md-select class="full-width" id="tenant" [(ngModel)]="infrastructureService.id" placeholder="Tenant name" (change)="onSelect(infrastructureService.id)">
+
+                    <md-option *ngFor="let user of users" [value]="user._id">
+                        {{user.username}}
+                    </md-option>
+                </md-select>
+
+            </md-list-item>
+        </md-list>
+
+
+        <md-radio-group class="list-radio-group" [(ngModel)]="infrastructureService.service" id="service" (change)="viewMode = false" name="service">
+            <md-radio-button class="list-radio-button" *ngFor="let service of services" [value]="service">
+                {{service}}
+            </md-radio-button>
+        </md-radio-group>
+    </md-card-content>
+    <md-card-content *ngIf="count == 1">
+        <md-list>
+
+            <md-list-item>
+                <h2 class="example-h2">Orchestration System<span class="danger">*</span></h2>
+            </md-list-item>
+        </md-list>
+        <md-radio-group class="list-radio-group" [(ngModel)]="infrastructureService.orchestration_system" (change)="viewMode = false" name="orchestration_system" id="orchestration_system">
+            <md-radio-button class="list-radio-button" *ngFor="let system of systems" [value]="system">
+                {{system}}
+            </md-radio-button>
+        </md-radio-group>
+    </md-card-content>
+    <md-card-content *ngIf="count == 2 ">
+        <md-list>
+
+            <md-list-item>
+                <h2 class="example-h2">Orchestration System<span class="danger">*</span></h2>
+            </md-list-item>
+        </md-list>
+        <md-radio-group class="list-radio-group" [(ngModel)]="infrastructureService.orchestration_system_option" (change)="viewMode = false" name="orchestration_system_option" id="orchestration_system_option">
+            <md-radio-button class="list-radio-button" *ngFor="let systemOption of systemOptions" [value]="systemOption">
+                {{systemOption}}
+            </md-radio-button>
+        </md-radio-group>
+    </md-card-content>
+
+
+    <md-card-actions class="btn">
+        <button md-raised-button *ngIf="count == 1 || count == 2" (click)="onBack()" id="onback">Back</button>
+        <button md-raised-button *ngIf="count == 0 || count == 1" (click)="onNext()" id="onnext" [disabled]="viewMode">Next</button>
+        <button md-raised-button *ngIf="count == 2" color="primary" (click)="onSubmit(infrastructureService)" id="onsubmit" [disabled]="viewMode">Submit</button>
+    </md-card-actions>
+
+</md-card>

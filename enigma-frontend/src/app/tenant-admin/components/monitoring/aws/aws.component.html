@@ -1,0 +1,63 @@
+
+  <table class="background">  
+    <tr>
+      <th>Region</th>
+      <th>Instance</th> 
+    </tr>
+    <tr>
+      <td>
+     <md-select class="quarter-width" id="region"  [(ngModel)]="statisticsData.region" name="region"  (change)="isRegion(statisticsData.region)">
+      <md-option  value="">select </md-option>
+            <md-option *ngFor="let region of regionList" [value]="region.RegionName">
+                {{region.RegionName}}
+            </md-option>
+        </md-select>
+  
+      </td>
+      <td>
+     <md-select class="full-width" id="instance" [(ngModel)]="statisticsData.instanceId" name="instance" (click)="isEditresource()"> 
+        <md-option *ngFor="let instance of instanceList" [value]="instance.InstanceId">
+            {{instance.InstanceId}}
+        </md-option>
+      </md-select>
+   </td>
+     </tr> 
+    </table>
+  
+  <!-- <div *ngIf="!isEdit"> -->
+ 
+    <div class="col-md-4" >
+    <h3>Avaliable Metrics</h3>
+     <md-list> 
+    <md-list-item *ngFor = "let metric of metricsNameList"> 
+     <md-checkbox  class="radio-btn-margin" [(ngModel)]="metric.isChecked"  [disabled]="!isMetrics" name="metricname" [value]="metric.name"  (change)="displayGraph(metric)">
+     {{metric.name}}
+   </md-checkbox></md-list-item>
+  </md-list>
+  
+    </div>
+   
+
+    <div *ngIf="isTimePeriod && isCpuDisplay">
+      
+            <!-- <md-select class="quarter-width" id="time" [(ngModel)]="_istimePeriod" name="timePeriod" (change)="filteringTime()"> 
+                <md-option *ngFor="let timePeriod of timePeriod" [value]="timePeriod.value">
+                    {{timePeriod.value}}
+                </md-option>
+              </md-select> -->
+              <md-select class="time" [(ngModel)]="statisticsData.timePeriod" name="timePeriod" (change)="filteringTime()">
+                  <md-option value="3600">1 Hour</md-option>
+                  <md-option value="86400">Last 24  Hours</md-option>
+                  <md-option value="604800">Last  1 week</md-option>
+                  <md-option value="2419200">Last 1 month</md-option>
+              </md-select>
+        </div>
+      
+    <div class="col-sm-8" *ngIf="isCpuDisplay ">
+      <app-charts [chartData]="chartData"></app-charts>
+    </div>
+   
+    <!-- </div> -->
+  
+  
+     
